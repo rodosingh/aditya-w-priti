@@ -597,9 +597,8 @@ test("petals and leafy decorations accompany still Ganesha and can be paused", a
     ),
   }));
   expect(motion.opacity).toBeGreaterThanOrEqual(0.1);
-  expect(motion.petals.every((duration) => duration === motion.wheel)).toBe(
-    true,
-  );
+  expect(motion.wheel).toBe("160s");
+  expect(motion.petals.every((duration) => duration === "6s")).toBe(true);
   await expect(page.locator(".ganesha-art > img")).toHaveAttribute(
     "src",
     "assets/images/ganesha-sketch.webp",

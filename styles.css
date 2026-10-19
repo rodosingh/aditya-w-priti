@@ -2889,7 +2889,7 @@ textarea {
   top: 34px;
   opacity: 0.13;
   pointer-events: none;
-  animation: chakra-turn var(--blessing-cycle) linear infinite;
+  animation: chakra-turn 160s linear infinite;
   z-index: -1;
   object-fit: contain;
 }
