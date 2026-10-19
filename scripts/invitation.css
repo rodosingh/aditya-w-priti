@@ -134,8 +134,13 @@ img {
   margin-top: 12px;
 }
 .wedding-date {
-  font: 21px/1.1 var(--serif);
+  display: inline-block;
+  font: 700 16px/1.5 var(--sans);
   margin: 20px 0 7px;
+  padding: 6px 9px;
+  color: #68543f;
+  background: #eee3cf;
+  border: 1px solid #c9b58f;
 }
 .hero-copy .hours,
 .address {
@@ -260,7 +265,7 @@ img {
   padding-top: 32px;
 }
 .ceremony-knot {
-  width: 124px;
+  width: 90px;
   margin: 0 auto 8px;
 }
 .program-page .eyebrow,
@@ -279,13 +284,13 @@ img {
   letter-spacing: 0.5px;
 }
 .program {
-  margin-top: 15px;
+  margin-top: 12px;
 }
 .program-entry {
   display: grid;
   grid-template-columns: 36px minmax(0, 1fr);
   gap: 13px;
-  padding: 8px;
+  padding: 5px 8px;
   border-top: 1px solid var(--line);
 }
 .program-entry:last-child {
@@ -296,9 +301,15 @@ img {
   padding-top: 15px;
 }
 .event-date {
-  font-size: 8px;
-  letter-spacing: 0.9px;
-  text-transform: uppercase;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
+  margin: 0 0 2px;
+  padding: 3px 8px;
+  color: #68543f;
+  background: #eee3cf;
+  border: 1px solid #c9b58f;
 }
 .program-entry h2 {
   font-size: 27px;
@@ -321,7 +332,7 @@ img {
   margin-top: 5px;
 }
 .rsvp {
-  margin-top: 14px;
+  margin-top: 10px;
   padding: 8px 7px;
   border: 1px solid var(--line);
   text-align: center;

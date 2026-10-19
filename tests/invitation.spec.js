@@ -437,10 +437,16 @@ test("family details, three venues, and the revised Grand Dinner are visible", a
   );
   await expect(
     page.locator('[data-event="grand-dinner"] .event-time'),
-  ).toHaveText("07:00 PM – 12:00 AM (5 Dec)");
+  ).toHaveText("07:00 PM – midnight");
   await expect(page.locator('[data-event="wedding"] .event-time')).toHaveText(
-    "06:00 PM – 05:00 AM (3 Dec)",
+    "06:00 PM – 05:00 AM next morning",
   );
+  await expect(page.locator('[data-event="wedding"] .event-date')).toHaveText(
+    "2 December 2026",
+  );
+  await expect(
+    page.locator('[data-event="grand-dinner"] .event-date'),
+  ).toHaveText("4 December 2026");
   const locations = [
     ["Groom’s Residence", "https://maps.app.goo.gl/yYMJiG3vR6FQppgM9"],
     ["Sunita Aangan", "https://maps.app.goo.gl/kuVFzMVT9Q6yqLRt9"],
@@ -933,12 +939,12 @@ test("Odia switch preserves entries, translates new RSVP feedback, and remembers
   await expect(page.locator("[data-date-long]").first()).toHaveText(
     "ବୁଧବାର, ୨ ଡିସେମ୍ବର ୨୦୨୬",
   );
-  await expect(
-    page.locator('[data-event="wedding"] .event-time'),
-  ).toContainText("୩ ଡିସେମ୍ବର");
+  await expect(page.locator('[data-event="wedding"] .event-time')).toHaveText(
+    "୦୬:୦୦ ଅପରାହ୍ନ – ପରଦିନ ୦୫:୦୦ ପୂର୍ବାହ୍ନ",
+  );
   await expect(
     page.locator('[data-event="grand-dinner"] .event-time'),
-  ).toHaveText("୦୭:୦୦ ଅପରାହ୍ନ – ୧୨:୦୦ ପୂର୍ବାହ୍ନ (୫ ଡିସେମ୍ବର)");
+  ).toHaveText("୦୭:୦୦ ଅପରାହ୍ନ – ମଧ୍ୟରାତ୍ରି");
   await expect(page.locator("#guest-name")).toHaveValue("Taylor Guest");
   await expect(page.locator("#guest-message")).toHaveValue(
     "My original message — ଶୁଭେଚ୍ଛା",

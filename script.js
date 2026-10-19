@@ -34,12 +34,17 @@
       timeZone: config.timeZone,
     }).format(new Date(value));
   function eventTime(event) {
-    if (!event.end) return `${formatTime(event.start)} onwards`;
-    const nextDay =
-      formatDate(event.start) !== formatDate(event.end)
-        ? ` (${formatDate(event.end, { month: "short", year: undefined })})`
-        : "";
-    return `${formatTime(event.start)} – ${formatTime(event.end)}${nextDay}`;
+    const start = formatTime(event.start);
+    if (!event.end) return `${start} onwards`;
+    const end = formatTime(event.end);
+    if (end === "12:00 AM") return `${start} – midnight`;
+    const overnight = formatDate(event.start) !== formatDate(event.end);
+    const ending = overnight
+      ? end.endsWith("AM")
+        ? " next morning"
+        : " next day"
+      : "";
+    return `${start} – ${end}${ending}`;
   }
 
   function text(selector, value) {
@@ -166,7 +171,7 @@
     location.append(icon("pin"), element("span", "", venue.name));
     card.append(
       icon(event.icon),
-      element("p", "event-date", formatDate(event.start)),
+      element("strong", "event-date", formatDate(event.start)),
       element("h3", "", event.title),
       element("p", "event-time", eventTime(event)),
       element("p", "", event.text),
@@ -498,7 +503,7 @@
     card.setAttribute("aria-labelledby", heading.id);
     const when = element("p", "calendar-event-time");
     when.append(
-      element("span", "", formatDate(event.start)),
+      element("strong", "calendar-event-date", formatDate(event.start)),
       element("span", "", eventTime(event)),
     );
     card.append(

@@ -18,13 +18,13 @@ Visit <http://localhost:4173>. This runs Python’s local web server; you can al
 
 ## Current wedding details
 
-| Celebration     | Date and time, India Standard Time           | Venue                            |
-| --------------- | -------------------------------------------- | -------------------------------- |
-| Thread Ceremony | 1 December 2026, 6:00 AM–5:00 PM             | Groom’s Residence                |
-| Wedding         | 2 December 2026, 6:00 PM–3 December, 5:00 AM | Sunita Aangan, Jagatpur, Cuttack |
-| Grand Dinner    | 4 December, 7:00 PM–5 December, midnight     | Crescent Convention Centre       |
+| Celebration     | Date and time, India Standard Time            | Venue                            |
+| --------------- | --------------------------------------------- | -------------------------------- |
+| Thread Ceremony | 1 December 2026, 6:00 AM–5:00 PM              | Groom’s Residence                |
+| Wedding         | 2 December 2026, 6:00 PM–5:00 AM next morning | Sunita Aangan, Jagatpur, Cuttack |
+| Grand Dinner    | 4 December 2026, 7:00 PM–midnight             | Crescent Convention Centre       |
 
-**Grand Dinner ends at midnight at the start of 5 December.** The page and PDF show 7:00 PM–12:00 AM (5 December). Google Calendar, Outlook, and Apple/.ics entries all include that ending, using UTC timestamps `20261204T133000Z`–`20261204T183000Z`.
+**The Wedding is on 2 December and the Grand Dinner is on 4 December.** The page, calendar chooser, and PDF emphasize each event’s start date. The Wedding time reads “6:00 PM–5:00 AM next morning” and Grand Dinner reads “7:00 PM–midnight”, without parenthetical dates. Calendar timestamps still preserve the overnight endings: Wedding ends on 3 December, and Grand Dinner ends at the start of 5 December. Grand Dinner’s Google Calendar, Outlook, and Apple/.ics entries use UTC timestamps `20261204T133000Z`–`20261204T183000Z`.
 
 The Thread Ceremony includes breakfast, lunch, and dinner. On the wedding day, breakfast and lunch are at Groom’s Residence and dinner is at Sunita Aangan. The Grand Dinner card retains the supplied note that breakfast, lunch, and dinner accompany the day’s celebrations; individual daytime meal times are not specified.
 

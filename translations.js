@@ -431,11 +431,18 @@
       if (!event.end)
         return `${start} ${locale === "or-IN" ? "ଠାରୁ" : "onwards"}`;
       const end = formatTime(event.end, locale === "en-GB" ? "en-US" : locale);
-      const next =
-        formatDate(event.start, locale) !== formatDate(event.end, locale)
-          ? ` (${formatDate(event.end, locale, { month: "short", year: undefined })})`
-          : "";
-      return `${start} – ${end}${next}`;
+      const englishEnd = formatTime(event.end, "en-US");
+      if (englishEnd === "12:00 AM")
+        return `${start} – ${locale === "or-IN" ? "ମଧ୍ୟରାତ୍ରି" : "midnight"}`;
+      const overnight =
+        formatDate(event.start, locale) !== formatDate(event.end, locale);
+      if (overnight && locale === "or-IN") return `${start} – ପରଦିନ ${end}`;
+      const ending = overnight
+        ? englishEnd.endsWith("AM")
+          ? " next morning"
+          : " next day"
+        : "";
+      return `${start} – ${end}${ending}`;
     };
     odia[formatDate(config.start, "en-GB", { weekday: "long" })] = formatDate(
       config.start,

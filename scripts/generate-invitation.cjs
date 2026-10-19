@@ -41,10 +41,19 @@ async function main() {
       hour12: true,
       timeZone: c.timeZone,
     }).format(new Date(value));
-  const hours = (event) =>
-    event.end
-      ? `${time(event.start)} – ${time(event.end)}${date(event.start) !== date(event.end) ? ` (${date(event.end, { month: "short", year: undefined })})` : ""}`
-      : `${time(event.start)} onwards`;
+  const hours = (event) => {
+    const start = time(event.start);
+    if (!event.end) return `${start} onwards`;
+    const end = time(event.end);
+    if (end === "12:00 AM") return `${start} – midnight`;
+    const overnight = date(event.start) !== date(event.end);
+    const ending = overnight
+      ? end.endsWith("AM")
+        ? " next morning"
+        : " next day"
+      : "";
+    return `${start} – ${end}${ending}`;
+  };
   const full = (name, nickname) => `${name}${nickname ? ` (${nickname})` : ""}`;
   const venue = c.venues.find((item) => item.id === c.primaryVenue);
   const names = `${c.couple.first} & ${c.couple.second}`;
