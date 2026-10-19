@@ -4,8 +4,7 @@ test-results/
 site/
 .DS_Store
 
-# Original photographs and design references stay on this computer.
-/couple-images/
+# Design references stay on this computer. Original couple photos are tracked.
 /custom-images/
 
 # Local credentials and editor files do not belong in the repository.

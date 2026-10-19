@@ -116,7 +116,7 @@ Calendar timestamps use UTC so each app handles the guest’s local time correct
 
 ### Photos and traditional artwork
 
-Your original files in **`couple-images/`** and **`custom-images/`** are untouched and excluded from Git by `.gitignore`. The website uses optimized copies in **`assets/images/`**. The deployment includes only the assets used by the active page; disabled photo selections and other unused optimized images stay in the private repository.
+The original photos and video in **`couple-images/`** are tracked in Git using reversible Base64 storage; the local JPEGs and video remain intact. The design references in **`custom-images/`** stay local and are excluded by `.gitignore`. The website uses optimized copies in **`assets/images/`**. Pages includes only assets used by the active page, but all committed files, including unused images and Base64 originals, are available from the public repository.
 
 - `couple-1.webp` is the hero portrait.
 - The **“With the blessings of our families”** section places the joined-hands drawing between the groom’s and bride’s names, including in the stacked mobile layout. `hand-tie-odia.webp` is a brown, transparent crop of the supplied sketch, with its embedded Hindi lettering removed. Real Odia text **ଶୁଭ ବିବାହ** appears above it in both languages. The groom’s nickname is spelled **ଶିବା** in the Odia version. Couple photographs remain in the welcome section and gallery.
@@ -134,6 +134,32 @@ To change a photo, put the new file in `assets/images/` and update its `src`, `a
 If you change the hero filename, also update the image preload and static fallback in `index.html`.
 
 The supplied `couple-images/wedding-invitation.mp4` says **5:00 PM**, while the confirmed wedding program starts at **6:00 PM**. It is preserved in the source folder but is not linked or copied into the published site. The downloadable PDF uses the confirmed 6:00 PM start.
+
+### Original photos in Git: Base64 storage
+
+**Base64 is a reversible encoding, not encryption or access control. Anyone with repository access can recover the original photos and video.** The repository is public, and public downloadability of these originals was accepted. Base64 text is roughly one-third larger than the original binary data.
+
+`.gitattributes` applies the `wedding-base64` Git filter to `couple-images/`. `scripts/photo-storage.cjs` encodes files when Git stores them and decodes them for local use. Filenames stay the same; Git stores a `WEDDING-PHOTO-BASE64-V1` marker followed by Base64 text. GitHub's normal JPEG/video previews may not display these encoded files.
+
+After cloning, install the local filter and restore the working copies:
+
+```bash
+git clone git@github.com:rodosingh/wedding-webpage.git
+cd wedding-webpage
+npm run photos:setup
+```
+
+This command needs Node.js but no npm dependencies. Run it once in every new clone before editing or committing originals. It sets the filter in that checkout's `.git/config`, restores encoded files, and leaves existing decoded local edits alone. Subsequent `git add` operations store Base64 while the files on your computer remain ordinary images/video. New originals can be added with `git add couple-images` and committed normally.
+
+A raw encoded download can also be restored separately:
+
+```bash
+node scripts/photo-storage.cjs decode < downloaded-photo.jpeg > restored-photo.jpeg
+```
+
+Keep the input and output paths different. The same command works for the encoded video. `npm run test:photos` checks binary round trips, rejects malformed Base64, and verifies that setup preserves local edits.
+
+Pages continues to load the optimized WebP images, avoiding Base64's extra transfer size. To use another original on the page, restore it locally, create an optimized copy in `assets/images/`, and update `photos` in `wedding-config.js`. The Pages workflow does not need the original-photo filter because it publishes the prepared website files only.
 
 ### Update the downloadable invitation
 
@@ -153,15 +179,15 @@ The print layout lives in `scripts/generate-invitation.cjs`. Photos are resized 
 
 ## Publish on GitHub Pages
 
-**Repository:** [rodosingh/wedding-webpage](https://github.com/rodosingh/wedding-webpage), private, with `main` as the deployment branch.
+**Repository:** [rodosingh/wedding-webpage](https://github.com/rodosingh/wedding-webpage), public, with `main` as the deployment branch.
 
-**Planned website address:** <https://rodosingh.github.io/wedding-webpage/>.
+**Website:** <https://rodosingh.github.io/wedding-webpage/>.
 
-**Deployment status:** the repository and workflow are ready, but the website is not live. GitHub rejected Pages setup on 19 October 2026 with HTTP 422: “Your current plan does not support GitHub Pages for this repository.” GitHub Pro is required for Pages from a private personal repository. The repository has been kept private; no account upgrade or billing change was made.
+GitHub Actions publishes the site on pushes to `main`. Making the repository public enables GitHub Pages on the existing free plan; no account upgrade is required.
 
 ### How this repository was set up
 
-The existing GitHub CLI login for `rodosingh` was used to create the private repository. The local project was initialized on `main`, connected over SSH, committed, and pushed:
+The existing GitHub CLI login for `rodosingh` was used to create the repository, initially private. The local project was initialized on `main`, connected over SSH, committed, and pushed:
 
 ```bash
 gh repo create rodosingh/wedding-webpage --private \
@@ -173,7 +199,9 @@ git commit -m "Prepare wedding invitation for private GitHub Pages repository"
 git push -u origin main
 ```
 
-These are setup records, not commands to rerun in an already connected checkout. `.gitignore` excludes original photo/reference folders, installed dependencies, local credentials, test output, and generated `site/` files.
+These are setup records, not commands to rerun in an already connected checkout. GitHub initially rejected Pages for the private repository on the current plan. The owner then chose public visibility and accepted that Base64 originals are publicly downloadable. The original-photo filter was configured, all nine originals were checked for exact binary round trips and committed, and repository visibility and Pages were configured as shown below.
+
+`.gitignore` excludes design references, installed dependencies, local credentials, test output, and generated `site/` files. It does not exclude `couple-images/`.
 
 `.github/workflows/deploy.yml` uses GitHub Actions to:
 
@@ -182,23 +210,29 @@ These are setup records, not commands to rerun in an already connected checkout.
 3. Run `npm run prepare:pages` to create the `site/` publishing directory.
 4. Upload `site/` with `actions/upload-pages-artifact` and deploy it with `actions/deploy-pages`.
 
-`scripts/prepare-site.cjs` copies the main page, CSS, JavaScript, active photo selections, referenced artwork, fonts and licenses, and the invitation PDF. It excludes commented-out images and unused assets, and refuses to publish if the configured private phone fields are populated. The original files and commented-out code remain available locally or in the private repository. No npm dependency installation, custom server, personal access token, or repository secret is needed by this workflow; GitHub supplies its short-lived workflow credentials.
+`scripts/prepare-site.cjs` copies the main page, CSS, JavaScript, active photo selections, referenced artwork, fonts and licenses, and the invitation PDF. It excludes commented-out images and unused assets from Pages, and refuses to publish if the configured private phone fields are populated. The originals, unused images, and commented-out code remain available in the public repository. No npm dependency installation, custom server, personal access token, or repository secret is needed by this workflow; GitHub supplies its short-lived workflow credentials.
 
-Repository privacy does not make the website private: every file in `site/` will be publicly downloadable once Pages is enabled. The mobile number is absent from the published configuration, links, and invitation PDF.
+Every file committed to this repository is public, including files excluded from `site/`. The mobile number is absent from the repository's configuration, contact links, and invitation PDF.
 
-### Finish publishing after GitHub Pro is active
+### Enable Pages and inspect deployments
 
-Enable Pages with **GitHub Actions** as the source in [Settings → Pages](https://github.com/rodosingh/wedding-webpage/settings/pages), or run the same API request that was attempted during setup:
+The repository was made public and Pages enabled with **GitHub Actions** as the source using these GitHub CLI requests:
 
 ```bash
+gh api --method PATCH repos/rodosingh/wedding-webpage -F private=false
 gh api --method POST repos/rodosingh/wedding-webpage/pages \
   -f build_type=workflow
+```
+
+The equivalent Pages setting is in [Settings → Pages](https://github.com/rodosingh/wedding-webpage/settings/pages). Visibility and Pages are already configured; these setup requests do not need to be repeated. A push to `main` triggers deployment. To run one manually or inspect its progress:
+
+```bash
 gh workflow run deploy.yml --repo rodosingh/wedding-webpage --ref main
 gh run list --repo rodosingh/wedding-webpage --workflow deploy.yml --limit 5
 gh run watch RUN_ID --repo rodosingh/wedding-webpage --exit-status
 ```
 
-Replace `RUN_ID` with the ID shown by `gh run list`. If Pages is already enabled, skip the `POST` request. The workflow's `github-pages` environment reports the final website URL after a successful deployment. Verify the page, photo gallery, language switch, and PDF download at the published address. If a run fails, inspect it with `gh run view RUN_ID --repo rodosingh/wedding-webpage --log-failed`.
+Replace `RUN_ID` with the ID shown by `gh run list`. The workflow's `github-pages` environment reports the final website URL after a successful deployment. Verify the page, photo gallery, language switch, and PDF download at the published address. If a run fails, inspect it with `gh run view RUN_ID --repo rodosingh/wedding-webpage --log-failed`.
 
 ### Publish future updates
 
@@ -212,7 +246,7 @@ git commit -m "Update wedding invitation"
 git push origin main
 ```
 
-Stage README, workflow, or script changes too if you edited them. Once Pages is enabled, each push to `main` automatically publishes the latest version. You can also run **Publish wedding invitation** manually from the Actions tab. The PDF is deployed as committed, so it must be regenerated locally whenever its details change.
+Stage README, workflow, script, or original-photo changes too if you edited them. Each push to `main` automatically publishes the latest version. You can also run **Publish wedding invitation** manually from the Actions tab. The PDF is deployed as committed, so it must be regenerated locally whenever its details change.
 
 For a WhatsApp or social-media link-preview photograph, add an `og:image` meta tag to `index.html` using the full published URL, for example:
 

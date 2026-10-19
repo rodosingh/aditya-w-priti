@@ -9,6 +9,8 @@
     "test:ui": "playwright test --ui",
     "invitation": "node scripts/generate-invitation.cjs",
     "prepare:pages": "node scripts/prepare-site.cjs",
+    "photos:setup": "node scripts/photo-storage.cjs setup",
+    "test:photos": "node --test scripts/photo-storage.test.cjs",
     "format": "prettier --write index.html styles.css script.js translations.js wedding-config.js README.md scripts/*.cjs tests/*.js playwright.config.js .github/workflows/*.yml"
   },
   "devDependencies": {

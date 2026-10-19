@@ -1,0 +1,2 @@
+# Store originals as Base64 in Git; photos:setup restores local image/video files.
+couple-images/** filter=wedding-base64 -diff -text
