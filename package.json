@@ -1,0 +1,19 @@
+{
+  "name": "a-beautiful-beginning",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Aditya and Priti’s traditional Odia wedding invitation",
+  "scripts": {
+    "start": "python3 -m http.server 4173 --bind 127.0.0.1",
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "invitation": "node scripts/generate-invitation.cjs",
+    "prepare:pages": "node scripts/prepare-site.cjs",
+    "format": "prettier --write index.html styles.css script.js translations.js wedding-config.js README.md scripts/*.cjs tests/*.js playwright.config.js .github/workflows/*.yml"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.11.1",
+    "@playwright/test": "1.64.1",
+    "prettier": "3.9.10"
+  }
+}

@@ -1,0 +1,14 @@
+node_modules/
+playwright-report/
+test-results/
+site/
+.DS_Store
+
+# Original photographs and design references stay on this computer.
+/couple-images/
+/custom-images/
+
+# Local credentials and editor files do not belong in the repository.
+.env
+.env.*
+!.env.example
