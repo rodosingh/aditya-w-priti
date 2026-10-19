@@ -60,6 +60,7 @@
   --sans: "Wedding Sans", Arial, sans-serif;
   --hand: "Wedding Hand", cursive;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --blessing-cycle: 6s;
 }
 *,
 *::before,
@@ -1323,6 +1324,7 @@ textarea {
 .attendance-options input:checked + span {
   background: #f4e9d3;
   border-color: #99794e;
+  color: #68543f;
 }
 .attendance-options input:focus-visible {
   outline: 2px solid var(--gold);
@@ -2885,9 +2887,9 @@ textarea {
   height: 670px;
   left: -320px;
   top: 34px;
-  opacity: 0.065;
+  opacity: 0.13;
   pointer-events: none;
-  animation: chakra-turn 160s linear infinite;
+  animation: chakra-turn var(--blessing-cycle) linear infinite;
   z-index: -1;
   object-fit: contain;
 }
@@ -3547,7 +3549,7 @@ textarea {
     height: 480px;
     top: 0;
     left: -250px;
-    opacity: 0.05;
+    opacity: 0.11;
   }
   .countdown-heading h2 {
     font-size: 31px;
@@ -3929,7 +3931,7 @@ html[lang="or"] .mantra-reading {
     opacity: 0.75;
   }
   100% {
-    transform: translate3d(var(--end-x), var(--end-y), 0) rotate(270deg)
+    transform: translate3d(var(--end-x), var(--end-y), 0) rotate(335deg)
       scale(0.9);
     opacity: 0;
   }
@@ -4509,4 +4511,29 @@ html[lang="or"] .lightbox figcaption {
 }
 [data-invitation-download][aria-busy="true"] {
   cursor: progress;
+}
+
+.attendance-detail {
+  margin-top: -5px;
+  padding: 14px;
+  border-left: 2px solid var(--line);
+  background: var(--paper);
+}
+.attendance-detail legend {
+  float: left;
+  width: 100%;
+}
+.attendance-detail .attendance-options {
+  clear: both;
+  grid-template-columns: minmax(0, 1fr);
+}
+.attendance-detail .attendance-options label > span {
+  justify-content: flex-start;
+  padding: 13px 12px 13px 36px;
+  line-height: 1.65;
+}
+@media (max-width: 480px) {
+  .attendance-options {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

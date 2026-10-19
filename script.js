@@ -291,7 +291,7 @@
   const petalLayer = $(".petal-shower");
   const petals = Array.from({ length: 18 }, (_, index) => {
     const petal = element("span", "flower-petal");
-    petal.style.setProperty("--duration", `${4.8 + (index % 5) * 0.45}s`);
+    petal.style.setProperty("--duration", "var(--blessing-cycle)");
     petal.style.setProperty("--delay", `${-index * 0.71}s`);
     petalLayer.append(petal);
     return petal;
@@ -756,8 +756,7 @@
     { passive: true },
   );
 
-  // No visitor information is saved in browser storage. Demo mode previews,
-  // email mode prepares a draft, and Formspree confirms only an HTTP success.
+  // Guest details stay in memory until the configured service confirms receipt.
   const form = $("#rsvp-form");
   const submitButton = $("#rsvp-submit");
   const status = $("#rsvp-status");
@@ -788,6 +787,7 @@
       "whatsapp",
       "email",
       "formspree",
+      "google-sheets",
       "external",
     ]).has(mode)
   )
@@ -796,6 +796,10 @@
     (mode === "email" && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) ||
     (mode === "formspree" &&
       !/^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/.test(endpoint)) ||
+    (mode === "google-sheets" &&
+      !/^https:\/\/script\.google\.com\/macros\/s\/[a-zA-Z0-9_-]+\/exec$/.test(
+        endpoint,
+      )) ||
     (mode === "external" && !externalUrl) ||
     (mode === "phone" && !/^\+?\d{8,15}$/.test(phone)) ||
     (mode === "whatsapp" && phone && !/^\+?\d{8,15}$/.test(phone))
@@ -807,7 +811,9 @@
     email: "Prepare email RSVP",
     whatsapp: "Continue to WhatsApp",
     formspree: "Send with love",
-    unavailable: "RSVP opening soon",
+    "google-sheets": "Submit",
+    unavailable:
+      config.rsvp.mode === "google-sheets" ? "Submit" : "RSVP opening soon",
   };
   function setSubmitLabel(label) {
     submitButton.replaceChildren(document.createTextNode(label), icon("arrow"));
@@ -830,29 +836,32 @@
         ? "Your message opens in WhatsApp. Review it and press Send to complete your RSVP."
         : "Choose the couple or a family member from your WhatsApp contacts, then send your RSVP.",
       formspree: "Your response is shared with the couple through Formspree.",
+      "google-sheets": "Your response is saved privately for the couple.",
       unavailable:
         "RSVP details are coming soon. Please contact the couple for help.",
     };
     $("#rsvp-note").textContent = notes[mode];
     submitButton.disabled = mode === "unavailable";
-    if (mode === "whatsapp") {
-      $("#guest-email").required = false;
-      const label = $('label[for="guest-email"] span');
-      label.textContent = "(optional)";
-      label.className = "optional";
-      label.removeAttribute("aria-hidden");
-    }
   }
 
+  function updateAttendance() {
+    const other = form.elements.attendance.value === "other";
+    $("#attendance-details").hidden = !other;
+    const detail = $("input[name=attendanceDetail]");
+    detail.disabled = !other;
+    detail.required = other;
+    if (!other) detail.checked = false;
+    status.hidden = true;
+  }
   $$("input[name=attendance]").forEach((input) =>
-    input.addEventListener("change", () => {
-      const declining = form.elements.attendance.value === "no";
-      $("#attending-fields").hidden = declining;
-      $("#guest-count").disabled = declining;
-      $("#guest-dietary").disabled = declining;
-      status.hidden = true;
-    }),
+    input.addEventListener("change", updateAttendance),
   );
+  for (const field of [form.elements.email, form.elements.phone]) {
+    field.addEventListener("input", () => {
+      form.elements.email.setCustomValidity("");
+      form.elements.phone.setCustomValidity("");
+    });
+  }
   $("#guest-name").addEventListener("input", (event) =>
     event.target.setCustomValidity(""),
   );
@@ -866,6 +875,17 @@
       behavior: reducedMotion.matches ? "instant" : "smooth",
       block: "nearest",
     });
+  }
+
+  let pendingSubmission = null;
+  function submissionId() {
+    const bytes = crypto.getRandomValues(new Uint8Array(16));
+    bytes[6] = (bytes[6] & 15) | 64;
+    bytes[8] = (bytes[8] & 63) | 128;
+    const hex = [...bytes]
+      .map((byte) => byte.toString(16).padStart(2, "0"))
+      .join("");
+    return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
   }
 
   form.addEventListener("submit", async (event) => {
@@ -882,14 +902,37 @@
       form.elements.name.reportValidity();
       return;
     }
+    const guestEmail = form.elements.email.value.trim();
+    const guestPhone = form.elements.phone.value.trim();
+    if (!guestEmail && !guestPhone) {
+      form.elements.email.setCustomValidity(
+        window.InvitationLanguage.translate(
+          "Please provide an email address or phone number.",
+        ),
+      );
+    }
+    if (
+      guestPhone &&
+      (!/^\+?[\d\s().-]+$/.test(guestPhone) ||
+        !/^\d{8,15}$/.test(guestPhone.replace(/\D/g, "")))
+    ) {
+      form.elements.phone.setCustomValidity(
+        window.InvitationLanguage.translate(
+          "Please enter a valid phone number with 8–15 digits.",
+        ),
+      );
+    }
     if (!form.reportValidity() || form.elements._gotcha.value) return;
-    const attending = form.elements.attendance.value === "yes";
+    const entireEvent = form.elements.attendance.value === "other";
     const response = {
       name: form.elements.name.value.trim(),
-      email: form.elements.email.value.trim(),
-      attendance: attending ? "Joyfully accepts" : "Regretfully declines",
-      guests: attending ? form.elements.guests.value : "0",
-      dietary: attending ? form.elements.dietary.value.trim() : "",
+      email: guestEmail,
+      phone: guestPhone,
+      attendance: entireEvent
+        ? "Attending the entire celebration"
+        : "Joyfully accepts",
+      guests: form.elements.guests.value,
+      dietary: form.elements.dietary.value.trim(),
       message: form.elements.message.value.trim(),
       _subject: `Wedding RSVP — ${names}`,
       _gotcha: "",
@@ -908,6 +951,7 @@
         `${t("Attendance")}: ${t(response.attendance)}`,
         `${t("Guests")}: ${response.guests}`,
         ...(response.email ? [`${t("Email")}: ${response.email}`] : []),
+        ...(response.phone ? [`${t("Phone number")}: ${response.phone}`] : []),
         ...(response.dietary
           ? [`${t("Dietary preferences")}: ${response.dietary}`]
           : []),
@@ -931,6 +975,7 @@
       const body = [
         `Name: ${response.name}`,
         `Email: ${response.email}`,
+        `Phone: ${response.phone}`,
         `Attendance: ${response.attendance}`,
         `Guests: ${response.guests}`,
         `Dietary preferences: ${response.dietary || "None noted"}`,
@@ -957,7 +1002,14 @@
       return;
     }
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 15000);
+    const timeout = setTimeout(() => controller.abort(), 25000);
+    if (mode === "google-sheets") {
+      const fingerprint = JSON.stringify(response);
+      if (pendingSubmission?.fingerprint !== fingerprint) {
+        pendingSubmission = { fingerprint, id: submissionId() };
+      }
+      response.submissionId = pendingSubmission.id;
+    }
     status.hidden = true;
     submitButton.disabled = true;
     setSubmitLabel("Sending your RSVP…");
@@ -965,22 +1017,29 @@
     try {
       const result = await fetch(endpoint, {
         method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+        // Apps Script accepts a simple text POST without an unsupported CORS preflight.
+        headers:
+          mode === "google-sheets"
+            ? { "Content-Type": "text/plain;charset=utf-8" }
+            : {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+        redirect: "follow",
         body: JSON.stringify(response),
         signal: controller.signal,
       });
       if (!result.ok) throw new Error("The response could not be delivered.");
+      if (mode === "google-sheets") {
+        const saved = await result.json();
+        if (saved.ok !== true || saved.submissionId !== response.submissionId)
+          throw new Error("The response was not acknowledged.");
+      }
+      pendingSubmission = null;
       form.reset();
-      $("#attending-fields").hidden = false;
-      $("#guest-count").disabled = false;
-      $("#guest-dietary").disabled = false;
+      updateAttendance();
       showStatus(
-        attending
-          ? `You’re on the list, ${response.name}! Your RSVP has been sent. We can’t wait to celebrate with you.`
-          : `Thank you for letting us know, ${response.name}. Your RSVP has been sent. We’ll miss you and will be thinking of you.`,
+        `You’re on the list, ${response.name}! Your RSVP has been sent. We can’t wait to celebrate with you.`,
       );
     } catch {
       showStatus(

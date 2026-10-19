@@ -2,8 +2,12 @@ const { test, expect } = require("@playwright/test");
 const AxeBuilder = require("@axe-core/playwright").default;
 const fs = require("node:fs/promises");
 
-test.beforeEach(async ({ page }) => {
+test.beforeEach(async ({ page, context }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
+  // Tests install their own page routes; never send fixtures to the real guest list.
+  await context.route("https://script.google.com/macros/s/**", (route) =>
+    route.abort("blockedbyclient"),
+  );
 });
 
 async function configure(page, changes) {
@@ -250,11 +254,11 @@ test("calendar download contains the venue and correct UTC event time", async ({
   expect(content).toContain("END:VCALENDAR\r\n");
   expect(content.match(/BEGIN:VEVENT/g)).toHaveLength(3);
   expect(content).toContain("DTSTART:20261201T003000Z");
-  expect(content).toContain("DTSTART:20261204T123000Z");
+  expect(content).toContain("DTSTART:20261204T133000Z");
   const dinner = content
     .split("BEGIN:VEVENT")
     .find((event) => event.includes("Grand Dinner"));
-  expect(dinner).not.toContain("DTEND:");
+  expect(dinner).toContain("DTEND:20261204T183000Z");
 });
 
 test("calendar choices open Google and Outlook drafts and download an Apple event", async ({
@@ -320,9 +324,9 @@ test("calendar choices open Google and Outlook drafts and download an Apple even
       .getAttribute("href"),
   );
   expect(dinnerGoogle.searchParams.get("dates")).toBe(
-    "20261204T123000Z/20261204T123000Z",
+    "20261204T133000Z/20261204T183000Z",
   );
-  expect(dinnerGoogle.searchParams.get("details")).toContain(
+  expect(dinnerGoogle.searchParams.get("details")).not.toContain(
     "End time to be confirmed",
   );
   const dinnerOutlook = new URL(
@@ -331,9 +335,11 @@ test("calendar choices open Google and Outlook drafts and download an Apple even
       .getAttribute("href"),
   );
   expect(dinnerOutlook.searchParams.get("startdt")).toBe(
-    "2026-12-04T12:30:00.000Z",
+    "2026-12-04T13:30:00.000Z",
   );
-  expect(dinnerOutlook.searchParams.has("enddt")).toBe(false);
+  expect(dinnerOutlook.searchParams.get("enddt")).toBe(
+    "2026-12-04T18:30:00.000Z",
+  );
   const downloadPromise = page.waitForEvent("download");
   await wedding.locator(".calendar-apple").click();
   const download = await downloadPromise;
@@ -463,7 +469,7 @@ test("family details, three venues, and the revised Grand Dinner are visible", a
   );
   await expect(
     page.locator('[data-event="grand-dinner"] .event-time'),
-  ).toHaveText("06:00 PM onwards");
+  ).toHaveText("07:00 PM – 12:00 AM (5 Dec)");
   await expect(page.locator('[data-event="wedding"] .event-time')).toHaveText(
     "06:00 PM – 05:00 AM (3 Dec)",
   );
@@ -526,13 +532,19 @@ test("WhatsApp lets guests choose a family contact without publishing a recipien
       body: "<p>WhatsApp preview</p>",
     }),
   );
+  await configure(page, {
+    rsvp: { mode: "whatsapp", phone: "", maxGuests: 4 },
+  });
   await page.goto("/");
   await expect(page.locator("#rsvp-note")).toContainText(
     "Choose the couple or a family member from your WhatsApp contacts",
   );
   await page.getByLabel("Your full name").fill("Taylor Guest");
+  await page
+    .getByLabel("Phone number", { exact: true })
+    .fill("+1 202 555 0123");
   await page.getByLabel("Joyfully accepts").check();
-  await page.getByLabel("Number of guests").selectOption("2");
+  await page.getByLabel("Number of people").selectOption("2");
   await page
     .getByLabel("A little note for us")
     .fill("Looking forward to it & sending our blessings!");
@@ -547,10 +559,10 @@ test("WhatsApp lets guests choose a family contact without publishing a recipien
   expect(url.searchParams.get("text")).toContain(
     "Looking forward to it & sending our blessings!",
   );
-  await expect(page.getByRole("status")).toContainText(
+  await expect(page.locator("#rsvp-status")).toContainText(
     "Choose the couple or a family member from your contacts, then press Send in WhatsApp",
   );
-  await expect(page.getByRole("status")).not.toContainText("has been sent");
+  await expect(page.locator("#rsvp-status")).not.toContainText("has been sent");
   await popup.close();
 });
 
@@ -573,6 +585,20 @@ test("petals and leafy decorations accompany still Ganesha and can be paused", a
   await expect(page.locator(".flower-petal").first()).toHaveCSS(
     "animation-name",
     "petal-blessing",
+  );
+  const motion = await page.evaluate(() => ({
+    wheel: getComputedStyle(document.querySelector(".background-chakra"))
+      .animationDuration,
+    petals: [...document.querySelectorAll(".flower-petal")].map(
+      (petal) => getComputedStyle(petal).animationDuration,
+    ),
+    opacity: Number(
+      getComputedStyle(document.querySelector(".background-chakra")).opacity,
+    ),
+  }));
+  expect(motion.opacity).toBeGreaterThanOrEqual(0.1);
+  expect(motion.petals.every((duration) => duration === motion.wheel)).toBe(
+    true,
   );
   await expect(page.locator(".ganesha-art > img")).toHaveAttribute(
     "src",
@@ -611,16 +637,17 @@ test("preview validates inputs and explicitly does not send a reply", async ({
   await page.getByRole("button", { name: "Preview RSVP" }).click();
   await expect(page.locator("#rsvp-status")).toBeHidden();
   await fillReply(page);
-  await page.getByLabel("Number of guests").selectOption("2");
+  await page.getByLabel("Number of people").selectOption("2");
   await page.getByRole("button", { name: "Preview RSVP" }).click();
-  await expect(page.getByRole("status")).toContainText(
+  await expect(page.locator("#rsvp-status")).toContainText(
     "has not been sent or saved",
   );
-  await expect(page.getByRole("status")).toContainText("Taylor Guest");
+  await expect(page.locator("#rsvp-status")).toContainText("Taylor Guest");
   expect(outgoing).toEqual([]);
   expect(await page.evaluate(() => localStorage.length)).toBe(0);
-  await page.getByLabel("Regretfully declines").check();
-  await expect(page.locator("#attending-fields")).toBeHidden();
+  await page.getByLabel("Other (please specify)", { exact: true }).check();
+  await expect(page.locator("#attending-fields")).toBeVisible();
+  await expect(page.locator("#attendance-details")).toBeVisible();
 });
 
 test("Formspree confirms accepted replies and preserves failed replies for retry", async ({
@@ -647,10 +674,10 @@ test("Formspree confirms accepted replies and preserves failed replies for retry
   });
   await page.goto("/");
   await fillReply(page);
-  await page.getByLabel("Number of guests").selectOption("3");
+  await page.getByLabel("Number of people").selectOption("3");
   await page.getByLabel("Dietary preferences").fill("Vegetarian");
   await page.getByRole("button", { name: "Send with love" }).click();
-  await expect(page.getByRole("status")).toContainText(
+  await expect(page.locator("#rsvp-status")).toContainText(
     "couldn’t confirm delivery",
   );
   await expect(page.getByLabel("Your full name")).toHaveValue("Taylor Guest");
@@ -659,7 +686,7 @@ test("Formspree confirms accepted replies and preserves failed replies for retry
   );
   accept = true;
   await page.getByRole("button", { name: "Send with love" }).click();
-  await expect(page.getByRole("status")).toContainText(
+  await expect(page.locator("#rsvp-status")).toContainText(
     "Your RSVP has been sent",
   );
   expect(payload).toMatchObject({
@@ -671,7 +698,7 @@ test("Formspree confirms accepted replies and preserves failed replies for retry
   await expect(page.getByLabel("Your full name")).toHaveValue("");
 });
 
-test("declining RSVP sends zero guests and omits stale dietary information", async ({
+test("the entire-event option keeps the party size and dietary preferences", async ({
   page,
 }) => {
   await configure(page, {
@@ -692,15 +719,18 @@ test("declining RSVP sends zero guests and omits stale dietary information", asy
   });
   await page.goto("/");
   await fillReply(page);
-  await page.getByLabel("Number of guests").selectOption("4");
+  await page.getByLabel("Number of people").selectOption("4");
   await page.getByLabel("Dietary preferences").fill("Vegetarian");
-  await page.getByLabel("Regretfully declines").check();
+  await page.getByLabel("Other (please specify)", { exact: true }).check();
+  await page.locator("input[name=attendanceDetail]").check();
   await page.getByRole("button", { name: "Send with love" }).click();
-  await expect(page.getByRole("status")).toContainText("We’ll miss you");
+  await expect(page.locator("#rsvp-status")).toContainText(
+    "You’re on the list",
+  );
   expect(payload).toMatchObject({
-    guests: "0",
-    dietary: "",
-    attendance: "Regretfully declines",
+    guests: "4",
+    dietary: "Vegetarian",
+    attendance: "Attending the entire celebration",
   });
 });
 
@@ -792,7 +822,7 @@ test("email RSVP prepares a draft and makes the guest's remaining action clear",
     .getByLabel("A little note for us")
     .fill("A song & a dance, please!");
   await page.getByRole("button", { name: "Prepare email RSVP" }).click();
-  await expect(page.getByRole("status")).toContainText(
+  await expect(page.locator("#rsvp-status")).toContainText(
     "Please press Send in your email app",
   );
   const draft = new URL(await page.evaluate(() => window.capturedDraft));
@@ -916,6 +946,9 @@ test("Odia switch preserves entries, translates new RSVP feedback, and remembers
   await context.route("https://wa.me/**", (route) =>
     route.fulfill({ body: "WhatsApp preview" }),
   );
+  await configure(page, {
+    rsvp: { mode: "whatsapp", phone: "", maxGuests: 4 },
+  });
   await page.goto("/");
   await fillReply(page);
   await page.locator("#guest-message").fill("My original message — ଶୁଭେଚ୍ଛା");
@@ -938,10 +971,14 @@ test("Odia switch preserves entries, translates new RSVP feedback, and remembers
   ).toContainText("୩ ଡିସେମ୍ବର");
   await expect(
     page.locator('[data-event="grand-dinner"] .event-time'),
-  ).toHaveText("୦୬:୦୦ ଅପରାହ୍ନ ଠାରୁ");
+  ).toHaveText("୦୭:୦୦ ଅପରାହ୍ନ – ୧୨:୦୦ ପୂର୍ବାହ୍ନ (୫ ଡିସେମ୍ବର)");
   await expect(page.locator("#guest-name")).toHaveValue("Taylor Guest");
   await expect(page.locator("#guest-message")).toHaveValue(
     "My original message — ଶୁଭେଚ୍ଛା",
+  );
+  await expect(page.locator("#guest-message")).toHaveAttribute(
+    "placeholder",
+    "ଶୁଭେଚ୍ଛା, ଯାତ୍ରା ସମ୍ବନ୍ଧୀୟ ପ୍ରଶ୍ନ ବା ଏକ ସନ୍ଦେଶ…",
   );
   const popupPromise = context.waitForEvent("page");
   await page.locator("#rsvp-submit").click();
@@ -961,6 +998,10 @@ test("Odia switch preserves entries, translates new RSVP feedback, and remembers
   await expect(page.locator("#hero-title em")).toHaveText("&");
   await expect(page.locator("#rsvp-status")).toContainText(
     "Your RSVP message is ready",
+  );
+  await expect(page.locator("#guest-message")).toHaveAttribute(
+    "placeholder",
+    "A wish, a travel question, or a little hello…",
   );
   await expect(page.locator("#guest-message")).toHaveValue(
     "My original message — ଶୁଭେଚ୍ଛା",
@@ -1048,4 +1089,127 @@ test("language switch still works when browser storage is unavailable", async ({
   await expect(page.locator("html")).toHaveAttribute("lang", "or");
   await page.locator("#language-toggle").click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
+});
+
+test("Google Sheets accepts a phone-only RSVP and requires the revealed entire-event choice", async ({
+  page,
+}) => {
+  const endpoint = "https://script.google.com/macros/s/test-deployment/exec";
+  await configure(page, {
+    rsvp: { mode: "google-sheets", endpoint, maxGuests: 4 },
+  });
+  const requests = [];
+  await page.route(endpoint, async (route) => {
+    const payload = JSON.parse(route.request().postData());
+    requests.push(payload);
+    expect(route.request().headers()["content-type"]).toBe(
+      "text/plain;charset=utf-8",
+    );
+    await route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify({ ok: true, submissionId: payload.submissionId }),
+    });
+  });
+  await page.goto("/");
+  const submit = page.locator("#rsvp-submit");
+  await expect(submit).toHaveText("Submit");
+  await page.getByLabel("Your full name").fill("Taylor Guest");
+  await page.getByLabel("Joyfully accepts").check();
+  await submit.click();
+  expect(requests).toHaveLength(0);
+  await page.getByLabel("Phone number", { exact: true }).fill("123");
+  await submit.click();
+  expect(requests).toHaveLength(0);
+  await page
+    .getByLabel("Phone number", { exact: true })
+    .fill("+1 202 555 0123");
+  await page.getByLabel("Other (please specify)", { exact: true }).check();
+  await expect(page.locator("#attendance-details")).toBeVisible();
+  await submit.click();
+  expect(requests).toHaveLength(0);
+  await page.locator("input[name=attendanceDetail]").check();
+  await page.getByLabel("Number of people").selectOption("3");
+  await page.getByLabel("Dietary preferences").fill("Vegetarian");
+  await page.getByLabel("A little note for us").fill("We will be there early.");
+  await page.locator("#language-toggle").click();
+  await expect(submit).toHaveText("ଦାଖଲ କରନ୍ତୁ");
+  await expect(page.locator("#attendance-details")).toContainText(
+    "ପୂରା ଉତ୍ସବରେ",
+  );
+  await expect(page.locator("#guest-message")).toHaveAttribute(
+    "placeholder",
+    "ଶୁଭେଚ୍ଛା, ଯାତ୍ରା ସମ୍ବନ୍ଧୀୟ ପ୍ରଶ୍ନ ବା ଏକ ସନ୍ଦେଶ…",
+  );
+  await expect(page.locator("#guest-message")).toHaveValue(
+    "We will be there early.",
+  );
+  const results = await new AxeBuilder({ page })
+    .withTags(["wcag2a", "wcag2aa", "wcag21aa"])
+    .analyze();
+  expect(results.violations).toEqual([]);
+  await submit.click();
+  await expect(page.locator("#rsvp-status")).toContainText(
+    "ଆପଣଙ୍କ ଉପସ୍ଥିତି ନିଶ୍ଚିତ ହୋଇଛି",
+  );
+  expect(requests).toHaveLength(1);
+  expect(requests[0]).toMatchObject({
+    name: "Taylor Guest",
+    email: "",
+    phone: "+1 202 555 0123",
+    guests: "3",
+    attendance: "Attending the entire celebration",
+    dietary: "Vegetarian",
+    message: "We will be there early.",
+  });
+  await expect(page.locator("#guest-name")).toHaveValue("");
+  await expect(page.locator("#attendance-details")).toBeHidden();
+  expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([
+    "invitation-language",
+  ]);
+});
+
+test("Google Sheets requires a save acknowledgment and reuses the submission ID on retry", async ({
+  page,
+}) => {
+  const endpoint = "https://script.google.com/macros/s/test-deployment/exec";
+  await configure(page, {
+    rsvp: { mode: "google-sheets", endpoint, maxGuests: 4 },
+  });
+  const ids = [];
+  await page.route(endpoint, async (route) => {
+    const payload = JSON.parse(route.request().postData());
+    ids.push(payload.submissionId);
+    const response =
+      ids.length === 1
+        ? { ok: true, submissionId: "wrong-id" }
+        : ids.length === 2
+          ? { ok: false }
+          : { ok: true, submissionId: payload.submissionId };
+    await route.fulfill({
+      contentType: "application/json",
+      body: JSON.stringify(response),
+    });
+  });
+  await page.goto("/");
+  await fillReply(page);
+  await page
+    .getByLabel("A little note for us")
+    .fill("Keep this message on retry.");
+  for (let attempt = 0; attempt < 2; attempt++) {
+    await page.getByRole("button", { name: "Submit", exact: true }).click();
+    await expect(page.locator("#rsvp-status")).toContainText(
+      "couldn’t confirm delivery",
+    );
+    await expect(page.locator("#guest-name")).toHaveValue("Taylor Guest");
+    await expect(page.locator("#guest-message")).toHaveValue(
+      "Keep this message on retry.",
+    );
+  }
+  await page.getByRole("button", { name: "Submit", exact: true }).click();
+  await expect(page.locator("#rsvp-status")).toContainText(
+    "You’re on the list",
+  );
+  expect(ids).toHaveLength(3);
+  expect(new Set(ids).size).toBe(1);
+  expect(await page.evaluate(() => localStorage.length)).toBe(0);
 });

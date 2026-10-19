@@ -1,2 +1,6 @@
-# Store originals as Base64 in Git; photos:setup restores local image/video files.
+# Store originals as Base64 in Git so GitHub holds reversible text, not raw binaries.
+# The "wedding-base64" clean/smudge filter named below is defined only in .git/config,
+# which Git cannot read from tracked files. Install it once per clone with `npm install`
+# or `npm run photos:setup`; that also restores local image/video files and adds a
+# pre-commit guard. Without it Git silently commits the raw binary instead of Base64.
 couple-images/** filter=wedding-base64 -diff -text

@@ -202,8 +202,22 @@
     "Your full name": "ଆପଣଙ୍କ ପୂରା ନାମ",
     "First and last name": "ନାମ ଓ ସାଙ୍ଗିଆ",
     "Email address": "ଇମେଲ୍ ଠିକଣା",
+    "Phone number": "ଫୋନ୍ ନମ୍ବର",
+    "Include your country code": "ଦେଶର କୋଡ୍ ସହ ନମ୍ବର ଲେଖନ୍ତୁ",
+    "Please provide an email address or phone number so we can reach you.":
+      "ଆପଣଙ୍କ ସହ ଯୋଗାଯୋଗ ପାଇଁ ଇମେଲ୍ ଠିକଣା କିମ୍ବା ଫୋନ୍ ନମ୍ବର ଦିଅନ୍ତୁ।",
+    "Please provide an email address or phone number.":
+      "ଦୟାକରି ଇମେଲ୍ ଠିକଣା କିମ୍ବା ଫୋନ୍ ନମ୍ବର ଦିଅନ୍ତୁ।",
+    "Please enter a valid phone number with 8–15 digits.":
+      "ଦୟାକରି ୮–୧୫ ଅଙ୍କର ଏକ ସଠିକ୍ ଫୋନ୍ ନମ୍ବର ଦିଅନ୍ତୁ।",
     "Will you be attending?": "ଆପଣ ଉପସ୍ଥିତ ରହିବେ କି?",
     "Joyfully accepts": "ସାନନ୍ଦେ ଯୋଗ ଦେବି",
+    "Other (please specify)": "ଅନ୍ୟ କିଛି (ଦୟାକରି ଜଣାନ୍ତୁ)",
+    "A little more about your plans": "ଆପଣଙ୍କ ଯୋଜନା ବିଷୟରେ ଆଉ କିଛି",
+    "Things won’t go smoothly without me. I have to be there for the entire event!":
+      "ମୁଁ ନ ଗଲେ କାମ ଠିକ୍‌ରେ ହେବନି। ପୂରା ଉତ୍ସବରେ ମୋତେ ରହିବାକୁ ହେବ!",
+    "Attending the entire celebration": "ପୂରା ଉତ୍ସବରେ ଉପସ୍ଥିତ ରହିବି",
+    "Number of people": "କେତେଜଣ ଆସିବେ",
     "Regretfully declines": "ଦୁଃଖିତ, ଆସିପାରିବି ନାହିଁ",
     "Number of guests": "ଅତିଥିଙ୍କ ସଂଖ୍ୟା",
     "Dietary preferences": "ଖାଦ୍ୟ ସମ୍ବନ୍ଧୀୟ ପସନ୍ଦ",
@@ -228,6 +242,9 @@
     "Preview RSVP": "ଉତ୍ତରର ପୂର୍ବାବଲୋକନ",
     "Prepare email RSVP": "ଇମେଲ୍ ଉତ୍ତର ପ୍ରସ୍ତୁତ କରନ୍ତୁ",
     "Send with love": "ଉତ୍ତର ପଠାନ୍ତୁ",
+    Submit: "ଦାଖଲ କରନ୍ତୁ",
+    "Your response is saved privately for the couple.":
+      "ଆପଣଙ୍କ ଉତ୍ତର କେବଳ ବରକନ୍ୟାଙ୍କ ପାଇଁ ଗୋପନୀୟ ଭାବେ ସଞ୍ଚୟ ହେବ।",
     "RSVP opening soon": "ଉତ୍ତର ଦେବାର ସୁବିଧା ଶୀଘ୍ର ଆସୁଛି",
     "Sending your RSVP…": "ଆପଣଙ୍କ ଉତ୍ତର ପଠାଯାଉଛି…",
     "Sample invitation · Responses are not being collected yet.":
@@ -264,6 +281,8 @@
     "Use the separate Google Maps links for Groom’s Residence, Sunita Aangan, and Crescent Convention Centre. For help, use the contact details shared with you privately.":
       "ବରଙ୍କ ବାସଭବନ, ସୁନୀତା ଆଙ୍ଗନ ଓ କ୍ରେସେଣ୍ଟ କନଭେନସନ୍ ସେଣ୍ଟର ପାଇଁ ଅଲଗା Google Maps ଲିଙ୍କ ବ୍ୟବହାର କରନ୍ତୁ। ସହାୟତା ପାଇଁ ବ୍ୟକ୍ତିଗତ ଭାବେ ଦିଆଯାଇଥିବା ଯୋଗାଯୋଗ ବିବରଣୀ ବ୍ୟବହାର କରନ୍ତୁ।",
     "How and when should I RSVP?": "କିପରି ଓ କେବେ ସୁଦ୍ଧା ଉପସ୍ଥିତି ଜଣାଇବି?",
+    "Please let us know by 30 October 2026. Fill in your name, an email address or phone number, your attendance choice, and the number of people joining you, then select Submit. Dietary preferences and a message are optional. Your response is saved privately for the couple.":
+      "୩୦ ଅକ୍ଟୋବର ୨୦୨୬ ସୁଦ୍ଧା ଜଣାନ୍ତୁ। ଆପଣଙ୍କ ନାମ, ଇମେଲ୍ ଠିକଣା କିମ୍ବା ଫୋନ୍ ନମ୍ବର, ଉପସ୍ଥିତିର ପସନ୍ଦ ଓ କେତେଜଣ ଆସିବେ ଲେଖି ‘ଦାଖଲ କରନ୍ତୁ’ ବାଛନ୍ତୁ। ଖାଦ୍ୟ ପସନ୍ଦ ଓ ସନ୍ଦେଶ ଇଚ୍ଛାଧୀନ। ଆପଣଙ୍କ ଉତ୍ତର କେବଳ ବରକନ୍ୟାଙ୍କ ପାଇଁ ଗୋପନୀୟ ଭାବେ ସଞ୍ଚୟ ହେବ।",
     "Please let us know by 30 October 2026. Prepare your RSVP here, then choose the couple or a family member from your WhatsApp contacts and send it. You can also use the contact details shared privately with your invitation.":
       "୩୦ ଅକ୍ଟୋବର ୨୦୨୬ ସୁଦ୍ଧା ଜଣାନ୍ତୁ। ଏଠାରେ ଉତ୍ତର ପ୍ରସ୍ତୁତ କରି WhatsApp ସମ୍ପର୍କ ତାଲିକାରୁ ବରକନ୍ୟା ବା ପରିବାରର ଜଣଙ୍କୁ ବାଛି ପଠାନ୍ତୁ। ନିମନ୍ତ୍ରଣ ସହ ବ୍ୟକ୍ତିଗତ ଭାବେ ଦିଆଯାଇଥିବା ଯୋଗାଯୋଗ ବିବରଣୀ ମଧ୍ୟ ବ୍ୟବହାର କରିପାରିବେ।",
     "WE’RE HERE FOR YOU": "ଆମେ ଆପଣଙ୍କ ସହ ଅଛୁ",
@@ -292,13 +311,23 @@
   };
   let language = "en";
   const normalize = (value) => value.replace(/\s+/g, " ").trim();
-  const translate = (value) =>
-    language === "or" ? odia[normalize(value)] || value : value;
+  const translate = (value) => {
+    if (language !== "or") return value;
+    const key = normalize(value);
+    if (odia[key]) return odia[key];
+    const confirmation = key.match(
+      /^You’re on the list, (.+)! Your RSVP has been sent\. We can’t wait to celebrate with you\.$/,
+    );
+    if (confirmation)
+      return `${confirmation[1]}, ଆପଣଙ୍କ ଉପସ୍ଥିତି ନିଶ୍ଚିତ ହୋଇଛି! ଆପଣଙ୍କ ଉତ୍ତର ପହଞ୍ଚିଛି। ଆପଣଙ୍କ ସହ ଉତ୍ସବ ପାଳନର ଅପେକ୍ଷାରେ ରହିଛୁ।`;
+    return value;
+  };
   const textSources = new WeakMap();
   const attributeSources = new WeakMap();
   const attributes = ["aria-label", "placeholder", "title", "alt"];
   const excluded =
-    "script, style, noscript, svg, textarea, #language-toggle, [data-no-translate]";
+    "script, style, noscript, svg, #language-toggle, [data-no-translate]";
+  const excludedText = `${excluded}, textarea`;
   let observer;
   const options = {
     subtree: true,
@@ -316,7 +345,7 @@
     const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
     while (walker.nextNode()) {
       const node = walker.currentNode;
-      if (node.parentElement.closest(excluded)) continue;
+      if (node.parentElement.closest(excludedText)) continue;
       const previous = textSources.get(node);
       const original =
         previous?.rendered === node.data ? previous.original : node.data;

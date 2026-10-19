@@ -3,8 +3,8 @@
  * Edit this file to update the page. After changing invitation details,
  * run `npm run invitation` to refresh the downloadable PDF as well.
  *
- * rsvp.mode: "phone", "whatsapp", "email", "formspree", "external", or "demo".
- * The Grand Dinner starts at 06:00 PM; its end time is not yet specified.
+ * rsvp.mode: "google-sheets", "phone", "whatsapp", "email", "formspree", "external", or "demo".
+ * The Grand Dinner runs from 7 PM on 4 December to midnight on 5 December.
  * All timestamps include India's UTC offset; the Wedding ends on 3 December.
  */
 window.WEDDING = {
@@ -81,8 +81,8 @@ window.WEDDING = {
     {
       id: "grand-dinner",
       title: "Grand Dinner",
-      start: "2026-12-04T18:00:00+05:30",
-      end: null,
+      start: "2026-12-04T19:00:00+05:30",
+      end: "2026-12-05T00:00:00+05:30",
       venueId: "reception",
       text: "A joyful gathering of family and friends to celebrate our new beginning.",
       meals: "Meals for the day: breakfast, lunch & dinner.",
@@ -172,12 +172,14 @@ window.WEDDING = {
   },
   invitationPdf: "assets/invitation-aditya-priti.pdf",
   rsvp: {
-    // No recipient number is published; guests choose their saved family contact.
-    mode: "whatsapp",
+    // Public Apps Script submission URL; the spreadsheet stays private.
+    // The private guest sheet and its records are never published with this site.
+    mode: "google-sheets",
     phone: "",
     phoneDisplay: "",
     email: "",
-    endpoint: "",
+    endpoint:
+      "https://script.google.com/macros/s/AKfycbxdNYu8vpSaDQMq-UNXXVUnI9ptc1UCT-vNegoecPXVD9UxjATsy76th8rLdc1AbsR5fg/exec",
     externalUrl: "",
     maxGuests: 4,
   },
@@ -208,7 +210,7 @@ window.WEDDING = {
     {
       question: "How and when should I RSVP?",
       answer:
-        "Please let us know by 30 October 2026. Prepare your RSVP here, then choose the couple or a family member from your WhatsApp contacts and send it. You can also use the contact details shared privately with your invitation.",
+        "Please let us know by 30 October 2026. Fill in your name, an email address or phone number, your attendance choice, and the number of people joining you, then select Submit. Dietary preferences and a message are optional. Your response is saved privately for the couple.",
     },
   ],
   hashtag: "#AdityaAndPriti",

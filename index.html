@@ -579,22 +579,21 @@
             <p class="form-intro">
               Share your plans and a little message for our families.
             </p>
+            <div class="field">
+              <label for="guest-name"
+                >Your full name <span aria-hidden="true">*</span></label
+              ><input
+                id="guest-name"
+                name="name"
+                autocomplete="name"
+                placeholder="First and last name"
+                maxlength="120"
+                required
+              />
+            </div>
             <div class="field-row">
               <div class="field">
-                <label for="guest-name"
-                  >Your full name <span aria-hidden="true">*</span></label
-                ><input
-                  id="guest-name"
-                  name="name"
-                  autocomplete="name"
-                  placeholder="First and last name"
-                  maxlength="120"
-                  required
-                />
-              </div>
-              <div class="field">
-                <label for="guest-email"
-                  >Email address <span aria-hidden="true">*</span></label
+                <label for="guest-email">Email address</label
                 ><input
                   id="guest-email"
                   name="email"
@@ -602,10 +601,27 @@
                   autocomplete="email"
                   placeholder="you@example.com"
                   maxlength="254"
-                  required
+                  aria-describedby="contact-hint"
+                />
+              </div>
+              <div class="field">
+                <label for="guest-phone">Phone number</label>
+                <input
+                  id="guest-phone"
+                  name="phone"
+                  type="tel"
+                  autocomplete="tel"
+                  inputmode="tel"
+                  placeholder="Include your country code"
+                  maxlength="32"
+                  aria-describedby="contact-hint"
                 />
               </div>
             </div>
+            <p class="field-hint" id="contact-hint">
+              Please provide an email address or phone number so we can reach
+              you.
+            </p>
             <fieldset class="attendance">
               <legend>
                 Will you be attending? <span aria-hidden="true">*</span>
@@ -626,16 +642,37 @@
                   ><input
                     type="radio"
                     name="attendance"
-                    value="no"
+                    value="other"
+                    aria-controls="attendance-details"
                     required
-                  /><span>Regretfully declines</span></label
+                  /><span>Other (please specify)</span></label
+                >
+              </div>
+            </fieldset>
+            <fieldset
+              class="attendance attendance-detail"
+              id="attendance-details"
+              hidden
+            >
+              <legend>A little more about your plans</legend>
+              <div class="attendance-options">
+                <label
+                  ><input
+                    type="radio"
+                    name="attendanceDetail"
+                    value="entire-event"
+                    disabled
+                  /><span
+                    >Things won’t go smoothly without me. I have to be there for
+                    the entire event!</span
+                  ></label
                 >
               </div>
             </fieldset>
             <div id="attending-fields">
               <div class="field-row">
                 <div class="field">
-                  <label for="guest-count">Number of guests</label
+                  <label for="guest-count">Number of people</label
                   ><select id="guest-count" name="guests">
                     <option value="1">1 guest</option>
                     <option value="2">2 guests</option>
@@ -684,7 +721,7 @@
               type="submit"
               disabled
             >
-              Preview RSVP
+              Submit
               <svg class="icon" aria-hidden="true">
                 <use href="#icon-arrow" />
               </svg>

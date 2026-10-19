@@ -13,6 +13,16 @@ async function main() {
   );
   const config = context.window.WEDDING;
   if (
+    config.rsvp.mode === "google-sheets" &&
+    !/^https:\/\/script\.google\.com\/macros\/s\/[a-zA-Z0-9_-]+\/exec$/.test(
+      config.rsvp.endpoint || "",
+    )
+  ) {
+    throw new Error(
+      "Connect the Google Sheets RSVP deployment URL before publishing.",
+    );
+  }
+  if (
     config.rsvp.phone ||
     config.rsvp.phoneDisplay ||
     config.contacts.some((contact) => contact.phone)
