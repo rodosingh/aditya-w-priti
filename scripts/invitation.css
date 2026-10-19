@@ -1,0 +1,357 @@
+@page {
+  size: A5 portrait;
+  margin: 0;
+}
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 11px/1.7 var(--sans);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+p,
+h1,
+h2 {
+  margin: 0;
+}
+h1,
+h2 {
+  font-family: var(--serif);
+  font-weight: 400;
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+.svg-defs {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.sheet {
+  position: relative;
+  isolation: isolate;
+  width: 148mm;
+  height: 209.5mm;
+  padding: 34px 38px 48px;
+  overflow: hidden;
+  break-after: page;
+}
+.sheet:last-child {
+  break-after: auto;
+}
+.sheet::before,
+.sheet::after {
+  content: "";
+  position: absolute;
+  inset: 15px;
+  border: 1px solid #c9b691;
+  pointer-events: none;
+  z-index: -1;
+}
+.sheet::after {
+  inset: 20px;
+  border-color: var(--line);
+}
+.page-content {
+  position: relative;
+}
+.eyebrow {
+  font-size: 8px;
+  line-height: 1.7;
+  letter-spacing: 1.3px;
+}
+.odia {
+  font-family: "Wedding Odia", serif;
+}
+.mantra-frame {
+  position: relative;
+  width: 267px;
+  margin: 0 auto;
+  padding: 9px 12px 8px;
+  border: 1px solid #c9b691;
+  text-align: center;
+}
+.mantra-frame::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid var(--line);
+}
+.mantra-script {
+  font:
+    500 23px/1.65 "Wedding Mantra",
+    serif;
+}
+.mantra-reading {
+  font-size: 6.5px;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+.invitation-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 23px;
+  margin-top: 10px;
+}
+.invocation {
+  font-size: 27px;
+  line-height: 1.5;
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+.hero-copy .eyebrow {
+  font-size: 7px;
+  letter-spacing: 1px;
+}
+.hero-copy h1 {
+  font-size: 64px;
+  letter-spacing: -2px;
+  line-height: 0.99;
+  margin: 13px 0 9px;
+}
+.hero-copy h1 span {
+  display: block;
+}
+.hero-copy h1 em {
+  font-size: 45px;
+}
+.nicknames {
+  font: 19px/1.3 var(--hand);
+}
+.tagline {
+  font: italic 15px/1.4 var(--serif);
+  margin-top: 12px;
+}
+.wedding-date {
+  font: 21px/1.1 var(--serif);
+  margin: 20px 0 7px;
+}
+.hero-copy .hours,
+.address {
+  font-size: 9px;
+  line-height: 1.6;
+}
+.wedding-venue {
+  display: inline-block;
+  font: 20px/1.2 var(--serif);
+  margin: 13px 0 4px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+}
+.hero-art {
+  padding-top: 0;
+}
+.ganesha {
+  width: 80%;
+  margin: 0 auto 8px;
+}
+.portrait-frame {
+  position: relative;
+  isolation: isolate;
+  margin: 4px 5px 0;
+}
+.portrait-frame::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border: 1px solid #b8a07b;
+  border-radius: 100px 100px 4px 4px;
+  z-index: -1;
+}
+.couple-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 100px 100px 3px 3px;
+}
+.sprig {
+  position: absolute;
+  color: #a68a5b;
+  z-index: -1;
+}
+.portrait-sprig-right {
+  width: 73px;
+  right: -23px;
+  top: -13px;
+}
+.portrait-sprig-left {
+  width: 60px;
+  left: -28px;
+  bottom: 24px;
+  transform: rotate(-30deg) scaleX(-1);
+}
+.photo-caption {
+  font: 16px/1.3 var(--hand);
+  text-align: center;
+  margin-top: 12px;
+}
+.invitation-text {
+  margin: 20px auto 0;
+  max-width: 440px;
+  font-size: 10px;
+  line-height: 1.85;
+  text-align: center;
+}
+.family-section {
+  margin-top: 21px;
+  padding-top: 15px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+.families {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 72px minmax(0, 1fr);
+  align-items: start;
+  gap: 10px;
+  margin-top: 12px;
+}
+.families h2 {
+  font-size: 22px;
+  line-height: 1.2;
+  margin-bottom: 6px;
+}
+.families p {
+  font-size: 9px;
+  line-height: 1.7;
+}
+.hand-tie .odia {
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+.hand-tie img {
+  width: 70px;
+}
+.wheel {
+  position: absolute;
+  z-index: -1;
+  opacity: 0.045;
+}
+.invitation-wheel {
+  width: 290px;
+  top: 160px;
+  left: -135px;
+}
+.footer {
+  position: absolute;
+  bottom: 29px;
+  left: 38px;
+  right: 38px;
+  border-top: 1px solid var(--line);
+  padding-top: 9px;
+  font-size: 6.5px;
+  letter-spacing: 1px;
+}
+.footer span {
+  float: right;
+}
+.program-page {
+  padding-top: 32px;
+}
+.ceremony-knot {
+  width: 124px;
+  margin: 0 auto 8px;
+}
+.program-page .eyebrow,
+.program-page h1,
+.dates {
+  text-align: center;
+}
+.program-page h1 {
+  font-size: 34px;
+  line-height: 1.04;
+  letter-spacing: -0.7px;
+  margin: 8px 0;
+}
+.dates {
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+.program {
+  margin-top: 15px;
+}
+.program-entry {
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 13px;
+  padding: 8px;
+  border-top: 1px solid var(--line);
+}
+.program-entry:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.event-number {
+  font: italic 28px/1.1 var(--serif);
+  padding-top: 15px;
+}
+.event-date {
+  font-size: 8px;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+}
+.program-entry h2 {
+  font-size: 27px;
+  line-height: 1.1;
+  margin: 2px 0 5px;
+}
+.hours {
+  font-size: 10px;
+}
+.venue {
+  display: inline-block;
+  font-size: 10px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-top: 2px;
+}
+.meals {
+  font-size: 8px;
+  line-height: 1.5;
+  margin-top: 5px;
+}
+.rsvp {
+  margin-top: 14px;
+  padding: 8px 7px;
+  border: 1px solid var(--line);
+  text-align: center;
+}
+.rsvp > p {
+  font-size: 10px;
+}
+.rsvp > .eyebrow {
+  font-size: 7px;
+  margin-bottom: 4px;
+}
+.rsvp small {
+  display: block;
+  font-size: 7px;
+  margin-top: 4px;
+}
+.closing {
+  margin-top: 8px;
+  font: 16px/1.4 var(--hand);
+  text-align: center;
+}
+.program-wheel {
+  width: 340px;
+  right: -150px;
+  top: 262px;
+}
+.program-sprig {
+  width: 80px;
+  top: 43px;
+  left: 20px;
+  transform: rotate(-30deg);
+  opacity: 0.65;
+}

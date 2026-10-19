@@ -374,18 +374,75 @@ test("download invitation returns a real PDF from both download links", async ({
     exact: true,
   });
   await expect(links).toHaveCount(2);
-  for (const link of await links.all())
+  for (const link of await links.all()) {
     await expect(link).toHaveAttribute(
       "href",
       "assets/invitation-aditya-priti.pdf",
     );
-  const downloadPromise = page.waitForEvent("download");
-  await links.first().click();
-  const download = await downloadPromise;
-  const data = await fs.readFile(await download.path());
-  expect(data.subarray(0, 5).toString()).toBe("%PDF-");
-  expect(data.length).toBeGreaterThan(10000);
-  expect(download.suggestedFilename()).toBe("Aditya-and-Priti-Invitation.pdf");
+    const downloadPromise = page.waitForEvent("download");
+    await link.click();
+    const download = await downloadPromise;
+    expect(await download.failure()).toBeNull();
+    const data = await fs.readFile(await download.path());
+    expect(data.subarray(0, 5).toString()).toBe("%PDF-");
+    expect(data.length).toBeGreaterThan(10000);
+    expect(download.suggestedFilename()).toBe(
+      "Aditya-and-Priti-Invitation.pdf",
+    );
+  }
+  const previews = page.getByRole("link", {
+    name: "Open invitation PDF",
+    exact: true,
+  });
+  await expect(previews).toHaveCount(2);
+  for (const preview of await previews.all()) {
+    await expect(preview).toHaveAttribute(
+      "href",
+      "assets/invitation-aditya-priti.pdf",
+    );
+    await expect(preview).toHaveAttribute("target", "_blank");
+    await expect(preview).not.toHaveAttribute("download");
+    const response = await page.request.get(await preview.getAttribute("href"));
+    expect(response.ok()).toBe(true);
+    expect(response.headers()["content-type"]).toContain("application/pdf");
+  }
+});
+
+test("failed invitation downloads show a translated fallback and can be retried", async ({
+  page,
+}) => {
+  await page.goto("/");
+  let downloads = 0;
+  page.on("download", () => downloads++);
+  const button = page.locator("[data-invitation-download]").first();
+  const status = page.locator("[data-invitation-status]").first();
+  for (const code of [404, 200]) {
+    await page.route("**/invitation-aditya-priti.pdf", (route) =>
+      route.fulfill({
+        status: code,
+        contentType: "text/html",
+        body: "<html>Invitation unavailable</html>",
+      }),
+    );
+    await button.click();
+    await expect(status).toHaveText(
+      "The download couldn’t start. Open the invitation PDF or try again.",
+    );
+    await expect(button).not.toHaveAttribute("aria-busy");
+    expect(downloads).toBe(0);
+    await page.unroute("**/invitation-aditya-priti.pdf");
+  }
+  await page.locator("#language-toggle").click();
+  await expect(status).toContainText("ଡାଉନଲୋଡ୍ ଆରମ୍ଭ ହୋଇପାରିଲା ନାହିଁ");
+  await expect(
+    page
+      .getByRole("link", { name: "ନିମନ୍ତ୍ରଣ PDF ଖୋଲନ୍ତୁ", exact: true })
+      .first(),
+  ).toBeVisible();
+  const downloaded = page.waitForEvent("download");
+  await button.click();
+  expect(await (await downloaded).failure()).toBeNull();
+  await expect(status).toContainText("ଏକ କପି ସଞ୍ଚୟ କରନ୍ତୁ");
 });
 
 test("family details, three venues, and the revised Grand Dinner are visible", async ({

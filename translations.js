@@ -68,6 +68,12 @@
       "ମହାପ୍ରଭୁ ଶ୍ରୀଜଗନ୍ନାଥ ଓ ଆମ ପରିବାରର ଆଶୀର୍ବାଦରେ, ଆମ ବିବାହ ଏବଂ ନୂତନ ଜୀବନର ଶୁଭାରମ୍ଭରେ ଯୋଗ ଦେବା ପାଇଁ ଆପଣଙ୍କୁ ସାଦର ନିମନ୍ତ୍ରଣ।",
     Odisha: "ଓଡ଼ିଶା",
     "Download Invitation": "ନିମନ୍ତ୍ରଣ ପତ୍ର ଡାଉନଲୋଡ୍",
+    "Open invitation PDF": "ନିମନ୍ତ୍ରଣ PDF ଖୋଲନ୍ତୁ",
+    "Preparing your invitation…": "ଆପଣଙ୍କ ନିମନ୍ତ୍ରଣ ପତ୍ର ପ୍ରସ୍ତୁତ ହେଉଛି…",
+    "If the download hasn’t started, open the invitation PDF to save a copy.":
+      "ଡାଉନଲୋଡ୍ ଆରମ୍ଭ ହୋଇନଥିଲେ, ନିମନ୍ତ୍ରଣ PDF ଖୋଲି ଏକ କପି ସଞ୍ଚୟ କରନ୍ତୁ।",
+    "The download couldn’t start. Open the invitation PDF or try again.":
+      "ଡାଉନଲୋଡ୍ ଆରମ୍ଭ ହୋଇପାରିଲା ନାହିଁ। ନିମନ୍ତ୍ରଣ PDF ଖୋଲନ୍ତୁ କିମ୍ବା ପୁଣି ଚେଷ୍ଟା କରନ୍ତୁ।",
     "We’ve saved a little place for you.":
       "ଆପଣଙ୍କ ପାଇଁ ଆମ ଉତ୍ସବରେ ଏକ ସ୍ୱତନ୍ତ୍ର ସ୍ଥାନ।",
     "With the blessings of Lord Ganesha and Lord Jagannath":

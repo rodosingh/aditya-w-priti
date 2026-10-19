@@ -144,8 +144,8 @@ The supplied `couple-images/wedding-invitation.mp4` says **5:00 PM**, while the 
 After cloning, install the local filter and restore the working copies:
 
 ```bash
-git clone git@github.com:rodosingh/wedding-webpage.git
-cd wedding-webpage
+git clone git@github.com:rodosingh/aditya-w-priti.git
+cd aditya-w-priti
 npm run photos:setup
 ```
 
@@ -163,7 +163,9 @@ Pages continues to load the optimized WebP images, avoiding Base64's extra trans
 
 ### Update the downloadable invitation
 
-The hero and footer download links point to **`assets/invitation-aditya-priti.pdf`**. This is a real, locally hosted, two-page A5 PDF with selectable text, clickable venue links, and private contact guidance.
+The hero and footer download links point to **`assets/invitation-aditya-priti.pdf`**. The download checks that the response is a valid PDF before saving it, and displays a message if the file is unavailable. **Open invitation PDF** opens the file directly in the browser, where guests can use the PDF viewer's Save or Download control. These direct links also work without JavaScript.
+
+The two-page A5 PDF uses the webpage's cream-and-brown palette, local fonts, Ganesha sketch, arched portrait, leafy drawings, Odia wedding lettering, joined-hands sketch, and red-and-cream knot. It keeps selectable text, clickable venue links, confirmed event times, and private contact guidance.
 
 After changing names, dates, parents, venues, or contact details, regenerate it:
 
@@ -175,25 +177,25 @@ npm run invitation
 
 The generator reads `wedding-config.js`, uses the same local images and fonts, checks that the layout fits, and writes the PDF. The page works without running this command, but an already generated PDF does not automatically change when the JavaScript configuration changes. Commit/upload the refreshed PDF along with the updated configuration.
 
-The print layout lives in `scripts/generate-invitation.cjs`. Photos are resized inside the temporary print document, preserving the website images. On Linux, Playwright may require browser system libraries (`npx playwright install --with-deps chromium`).
+The print layout lives in `scripts/invitation.css`; `scripts/generate-invitation.cjs` builds it using the fonts and palette from `styles.css` and the botanical drawing from `index.html`. Images are resized inside the temporary print document, preserving transparent artwork and the website's source images. Run `npm run invitation -- --preview` to save page previews under `test-results/invitation-preview/`. On Linux, Playwright may require browser system libraries (`npx playwright install --with-deps chromium`).
 
 ## Publish on GitHub Pages
 
-**Repository:** [rodosingh/wedding-webpage](https://github.com/rodosingh/wedding-webpage), public, with `main` as the deployment branch.
+**Repository:** [rodosingh/aditya-w-priti](https://github.com/rodosingh/aditya-w-priti), public, with `main` as the deployment branch.
 
-**Website:** <https://rodosingh.github.io/wedding-webpage/>.
+**Website:** <https://rodosingh.github.io/aditya-w-priti/>.
 
 GitHub Actions publishes the site on pushes to `main`. Making the repository public enables GitHub Pages on the existing free plan; no account upgrade is required.
 
 ### How this repository was set up
 
-The existing GitHub CLI login for `rodosingh` was used to create the repository, initially private. The local project was initialized on `main`, connected over SSH, committed, and pushed:
+The existing GitHub CLI login for `rodosingh` was used to create the repository, initially private. The local project was initialized on `main`, connected over SSH, committed, and pushed. The commands below use the current repository name after its rename to `aditya-w-priti`:
 
 ```bash
-gh repo create rodosingh/wedding-webpage --private \
+gh repo create rodosingh/aditya-w-priti --private \
   --description 'Aditya and Priti’s Odia wedding invitation'
 git init -b main
-git remote add origin git@github.com:rodosingh/wedding-webpage.git
+git remote add origin git@github.com:rodosingh/aditya-w-priti.git
 git add .
 git commit -m "Prepare wedding invitation for private GitHub Pages repository"
 git push -u origin main
@@ -219,20 +221,20 @@ Every file committed to this repository is public, including files excluded from
 The repository was made public and Pages enabled with **GitHub Actions** as the source using these GitHub CLI requests:
 
 ```bash
-gh api --method PATCH repos/rodosingh/wedding-webpage -F private=false
-gh api --method POST repos/rodosingh/wedding-webpage/pages \
+gh api --method PATCH repos/rodosingh/aditya-w-priti -F private=false
+gh api --method POST repos/rodosingh/aditya-w-priti/pages \
   -f build_type=workflow
 ```
 
-The equivalent Pages setting is in [Settings → Pages](https://github.com/rodosingh/wedding-webpage/settings/pages). Visibility and Pages are already configured; these setup requests do not need to be repeated. A push to `main` triggers deployment. To run one manually or inspect its progress:
+The equivalent Pages setting is in [Settings → Pages](https://github.com/rodosingh/aditya-w-priti/settings/pages). Visibility and Pages are already configured; these setup requests do not need to be repeated. A push to `main` triggers deployment. To run one manually or inspect its progress:
 
 ```bash
-gh workflow run deploy.yml --repo rodosingh/wedding-webpage --ref main
-gh run list --repo rodosingh/wedding-webpage --workflow deploy.yml --limit 5
-gh run watch RUN_ID --repo rodosingh/wedding-webpage --exit-status
+gh workflow run deploy.yml --repo rodosingh/aditya-w-priti --ref main
+gh run list --repo rodosingh/aditya-w-priti --workflow deploy.yml --limit 5
+gh run watch RUN_ID --repo rodosingh/aditya-w-priti --exit-status
 ```
 
-Replace `RUN_ID` with the ID shown by `gh run list`. The workflow's `github-pages` environment reports the final website URL after a successful deployment. Verify the page, photo gallery, language switch, and PDF download at the published address. If a run fails, inspect it with `gh run view RUN_ID --repo rodosingh/wedding-webpage --log-failed`.
+Replace `RUN_ID` with the ID shown by `gh run list`. The workflow's `github-pages` environment reports the final website URL after a successful deployment. Verify the page, photo gallery, language switch, and PDF download at the published address. If a run fails, inspect it with `gh run view RUN_ID --repo rodosingh/aditya-w-priti --log-failed`.
 
 ### Publish future updates
 
@@ -253,7 +255,7 @@ For a WhatsApp or social-media link-preview photograph, add an `og:image` meta t
 ```html
 <meta
   property="og:image"
-  content="https://rodosingh.github.io/wedding-webpage/assets/images/couple-1.webp"
+  content="https://rodosingh.github.io/aditya-w-priti/assets/images/couple-1.webp"
 />
 ```
 
