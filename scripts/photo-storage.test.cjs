@@ -32,6 +32,15 @@ test("setup restores encoded Git files and preserves existing local edits", asyn
     const git = (...args) => execFileSync("git", args, { cwd: root });
     git("init", "-q");
     await fs.mkdir(path.join(root, "couple-images"));
+    await fs.mkdir(path.join(root, "scripts"));
+    await fs.copyFile(
+      __dirname + "/photo-storage.cjs",
+      path.join(root, "scripts/photo-storage.cjs"),
+    );
+    await fs.writeFile(
+      path.join(root, ".gitattributes"),
+      "couple-images/** filter=wedding-base64 -diff -text\n",
+    );
     const original = Buffer.from([255, 216, 255, 0, 1, 2, 3]);
     const edited = Buffer.from([255, 216, 255, 4, 5, 6]);
     const image = path.join(root, "couple-images", "original.jpeg");
@@ -39,10 +48,24 @@ test("setup restores encoded Git files and preserves existing local edits", asyn
     await fs.writeFile(image, encode(original));
     await fs.writeFile(local, original);
     git("add", "couple-images");
+    const storedOriginal = git("rev-parse", ":couple-images/original.jpeg");
+    const storedLocal = git("rev-parse", ":couple-images/edited.jpeg");
     await fs.writeFile(local, edited);
     assert.equal(await setup(root), 1);
     assert.deepEqual(await fs.readFile(image), original);
     assert.deepEqual(await fs.readFile(local), edited);
+    assert.deepEqual(
+      git("rev-parse", ":couple-images/original.jpeg"),
+      storedOriginal,
+    );
+    assert.deepEqual(
+      git("rev-parse", ":couple-images/edited.jpeg"),
+      storedLocal,
+    );
+    assert.equal(
+      git("diff", "--name-only").toString().trim(),
+      "couple-images/edited.jpeg",
+    );
     assert.equal(await setup(root), 0);
   } finally {
     await fs.rm(root, { recursive: true, force: true });

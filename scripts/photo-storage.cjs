@@ -32,7 +32,7 @@ function encode(bytes) {
 }
 
 async function setup(root = path.resolve(__dirname, "..")) {
-  const git = (args) => execFileSync("git", args, { cwd: root });
+  const git = (args, input) => execFileSync("git", args, { cwd: root, input });
   git([
     "config",
     "--local",
@@ -54,6 +54,7 @@ async function setup(root = path.resolve(__dirname, "..")) {
   // Validate every encoded file before restoring any of them. Leave local edits
   // and deleted files alone; only our encoded format needs conversion.
   const pending = [];
+  const unchanged = [];
   for (const filename of filenames) {
     const absolute = path.join(root, filename);
     let bytes;
@@ -63,9 +64,19 @@ async function setup(root = path.resolve(__dirname, "..")) {
       if (error.code === "ENOENT") continue;
       throw error;
     }
-    if (isEncoded(bytes)) pending.push([absolute, decode(bytes)]);
+    const original = decode(bytes);
+    if (isEncoded(bytes)) pending.push([absolute, original]);
+    const indexHash = git(["rev-parse", `:${filename}`]);
+    const restoredHash = git(
+      ["hash-object", `--path=${filename}`, "--stdin"],
+      original,
+    );
+    if (indexHash.equals(restoredHash)) unchanged.push(filename);
   }
   for (const [filename, bytes] of pending) await fs.writeFile(filename, bytes);
+  // A checkout made before filter setup cached the encoded file sizes. Refresh
+  // that cache only for content identical to the index; never stage local edits.
+  if (unchanged.length) git(["add", "--", ...unchanged]);
   return pending.length;
 }
 
