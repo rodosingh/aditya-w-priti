@@ -214,8 +214,8 @@
     "Joyfully accepts": "ସାନନ୍ଦେ ଯୋଗ ଦେବି",
     "Other (please specify)": "ଅନ୍ୟ କିଛି (ଦୟାକରି ଜଣାନ୍ତୁ)",
     "A little more about your plans": "ଆପଣଙ୍କ ଯୋଜନା ବିଷୟରେ ଆଉ କିଛି",
-    "Things won’t go smoothly without me. I have to be there for the entire event!":
-      "ମୁଁ ନ ଗଲେ କାମ ଠିକ୍‌ରେ ହେବନି। ପୂରା ଉତ୍ସବରେ ମୋତେ ରହିବାକୁ ହେବ!",
+    "There is no way this can happen without me. I have to be there ;)":
+      "ମୋ ବିନା ଏହା ସମ୍ଭବ ନୁହେଁ। ମୋତେ ସେଠାରେ ରହିବାକୁ ହିଁ ହେବ ;)",
     "Attending the entire celebration": "ପୂରା ଉତ୍ସବରେ ଉପସ୍ଥିତ ରହିବି",
     "Number of people": "କେତେଜଣ ଆସିବେ",
     "Regretfully declines": "ଦୁଃଖିତ, ଆସିପାରିବି ନାହିଁ",

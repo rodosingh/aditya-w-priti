@@ -1133,7 +1133,7 @@ test("Google Sheets accepts a phone-only RSVP and requires the revealed entire-e
   await page.locator("#language-toggle").click();
   await expect(submit).toHaveText("ଦାଖଲ କରନ୍ତୁ");
   await expect(page.locator("#attendance-details")).toContainText(
-    "ପୂରା ଉତ୍ସବରେ",
+    "ମୋ ବିନା ଏହା ସମ୍ଭବ ନୁହେଁ।",
   );
   await expect(page.locator("#guest-message")).toHaveAttribute(
     "placeholder",

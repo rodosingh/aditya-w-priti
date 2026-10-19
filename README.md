@@ -68,7 +68,7 @@ The interactive map loads only after **View interactive map** is selected. **Get
 
 ### RSVP and contact details
 
-**The RSVP form uses a private Google Sheet.** Guests enter their name and at least one contact method (email or phone), choose their attendance, and select the number of people. Dietary preferences and a message are optional. **Other (please specify)** reveals the radio choice “Things won’t go smoothly without me. I have to be there for the entire event!” Both choices record an attending party. **Submit** confirms only after the Sheet receiver acknowledges the saved response.
+**The RSVP form uses a private Google Sheet.** Guests enter their name and at least one contact method (email or phone), choose their attendance, and select the number of people. Dietary preferences and a message are optional. **Other (please specify)** reveals the radio choice “There is no way this can happen without me. I have to be there ;)” Both choices record an attending party. **Submit** confirms only after the Sheet receiver acknowledges the saved response.
 
 The Sheet has columns for submission time, name, email, phone, number of people, attendance, dietary preferences, and message. A hidden submission ID prevents duplicate rows when a guest retries after a connection failure. Guest data stays out of the public repository, website files, and browser storage. Only the couple and people they share the Sheet with can view the guest list.
 
