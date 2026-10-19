@@ -178,7 +178,7 @@ Pages continues to load the optimized WebP images, avoiding Base64's extra trans
 
 ### Update the downloadable invitation
 
-The hero and footer download links point to **`assets/invitation-aditya-priti.pdf`**. The download checks that the response is a valid PDF before saving it, and displays a message if the file is unavailable. **Open invitation PDF** opens the file directly in the browser, where guests can use the PDF viewer's Save or Download control. These direct links also work without JavaScript.
+The hero and footer **Download Invitation** buttons open **`assets/invitation-aditya-priti.pdf`** in a new tab. Guests can read the invitation there and use the PDF viewer's Save or Download control to keep a copy. These direct links also work without JavaScript.
 
 The two-page A5 PDF uses the webpage's cream-and-brown palette, local fonts, Ganesha sketch, arched portrait, leafy drawings, Odia wedding lettering, joined-hands sketch, and red-and-cream knot. It keeps selectable text, clickable venue links, confirmed event times, and private contact guidance.
 

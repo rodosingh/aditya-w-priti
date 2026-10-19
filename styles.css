@@ -4490,29 +4490,6 @@ html[lang="or"] .lightbox figcaption {
   }
 }
 
-.invitation-help {
-  margin-top: 10px;
-  font-size: 12px;
-  line-height: 1.65;
-}
-.invitation-help a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 32px;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-}
-.invitation-help [role="status"]:not(:empty) {
-  display: block;
-  margin-top: 5px;
-}
-.site-footer .invitation-help {
-  text-align: center;
-}
-[data-invitation-download][aria-busy="true"] {
-  cursor: progress;
-}
-
 .attendance-detail {
   margin-top: -5px;
   padding: 14px;

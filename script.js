@@ -221,68 +221,8 @@
     $("#venue-grid").append(card);
   });
 
-  $$("[data-invitation-download], [data-invitation-view]").forEach((link) => {
-    link.href = config.invitationPdf;
-  });
-  let invitationPending = false;
   $$("[data-invitation-download]").forEach((link) => {
-    link.addEventListener("click", async (event) => {
-      // Preserve native links for local-file previews and modified clicks.
-      if (
-        location.protocol === "file:" ||
-        event.ctrlKey ||
-        event.metaKey ||
-        event.shiftKey ||
-        event.altKey
-      )
-        return;
-      event.preventDefault();
-      if (invitationPending) return;
-      invitationPending = true;
-      const status = link.parentElement.parentElement.querySelector(
-        "[data-invitation-status]",
-      );
-      const announce = (message) => {
-        if (status) status.textContent = message;
-      };
-      link.setAttribute("aria-busy", "true");
-      announce("Preparing your invitation…");
-      const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 20000);
-      try {
-        // Fetch first so HTTP errors cannot silently download an HTML error page.
-        const response = await fetch(link.href, {
-          cache: "no-cache",
-          signal: controller.signal,
-        });
-        if (!response.ok) throw new Error("Invitation unavailable");
-        const bytes = await response.arrayBuffer();
-        if (new TextDecoder().decode(bytes.slice(0, 5)) !== "%PDF-")
-          throw new Error("Invalid invitation file");
-        const url = URL.createObjectURL(
-          new Blob([bytes], { type: "application/pdf" }),
-        );
-        const download = document.createElement("a");
-        download.href = url;
-        download.download = link.download;
-        document.body.append(download);
-        download.click();
-        download.remove();
-        // Leave enough time for Chrome and Safari to finish reading the blob.
-        setTimeout(() => URL.revokeObjectURL(url), 60000);
-        announce(
-          "If the download hasn’t started, open the invitation PDF to save a copy.",
-        );
-      } catch {
-        announce(
-          "The download couldn’t start. Open the invitation PDF or try again.",
-        );
-      } finally {
-        clearTimeout(timeout);
-        link.removeAttribute("aria-busy");
-        invitationPending = false;
-      }
-    });
+    link.href = config.invitationPdf;
   });
 
   // The pencil derivative preserves the original artwork's palm position.
