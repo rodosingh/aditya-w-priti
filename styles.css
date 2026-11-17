@@ -815,7 +815,7 @@ h1 > span {
 .schedule {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(6, auto);
+  grid-template-rows: repeat(7, auto);
   column-gap: 26px;
   row-gap: 0;
   position: relative;
@@ -3155,15 +3155,19 @@ textarea {
 .event-card > .event-meals {
   grid-row: 4;
 }
-.event-card > .event-extras {
+.event-card > .event-program {
   grid-row: 5;
+}
+.event-card > .event-extras {
+  grid-row: 6;
   margin-top: 10px;
 }
 .event-card > .event-venue {
-  grid-row: 6;
+  grid-row: 7;
 }
 .event-card > .event-primary,
 .event-card > .event-meals,
+.event-card > .event-program,
 .event-card > .event-extras,
 .event-card > .event-venue {
   justify-self: stretch;
@@ -3203,6 +3207,7 @@ textarea {
   margin-bottom: 10px;
 }
 .event-card .event-subcard .event-meals {
+  border-top: 1px solid var(--line);
   margin-top: 12px;
   padding-top: 10px;
 }
@@ -3229,17 +3234,20 @@ textarea {
   font-size: 14px;
 }
 .event-card .event-meals {
-  border-top: 1px solid var(--line);
-  margin-top: 20px;
-  padding-top: 17px;
+  margin-top: 18px;
   font-size: 13px !important;
 }
 .event-card .event-program {
   list-style: none;
   width: 100%;
-  margin: 18px 0 0;
+  margin: 0;
   padding: 0;
   text-align: left;
+}
+.event-card > .event-program {
+  border-top: 1px solid var(--line);
+  margin-top: 16px;
+  padding-top: 12px;
 }
 .event-program-item {
   display: flex;

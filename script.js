@@ -198,12 +198,15 @@
       element("p", "event-time", eventTime(primary)),
       element("p", "", primary.text),
     );
-    if (Array.isArray(primary.program) && primary.program.length) {
-      primaryBody.append(buildProgram(primary.program));
-    }
     card.append(primaryBody);
 
+    // One-line meals summary stays on the shared aligned row; the detailed
+    // timeline is rendered below it so the lower half of each card is used.
     card.append(element("p", "event-meals", primary.meals));
+
+    if (Array.isArray(primary.program) && primary.program.length) {
+      card.append(buildProgram(primary.program));
+    }
 
     // Additional same-day events (e.g. Haldi + Mangan) render as a nested
     // sub-card that stays inside the day's box, after the primary meals line.
