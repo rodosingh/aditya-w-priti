@@ -46,7 +46,26 @@ test("invitation loads local assets without script or HTTP errors", async ({
   await expect(page.locator(".mantra-reading")).toHaveText(
     "Om Gan Ganapathaye Namah",
   );
-  await expect(page.locator(".event-card")).toHaveCount(4);
+  await expect(page.locator(".event-card")).toHaveCount(3);
+  const firstDay = page.locator(".event-card").filter({
+    has: page.locator(".event-date", { hasText: "1 December 2026" }),
+  });
+  await expect(firstDay).toHaveCount(1);
+  await expect(firstDay.locator(".event-date")).toHaveCount(1);
+  await expect(firstDay.locator("h3")).toHaveText([
+    "Thread Ceremony",
+    "Haldi + Mangan",
+  ]);
+  await expect(firstDay.locator(".event-time")).toHaveText([
+    "09:00 AM – 05:00 PM",
+    "06:00 PM – 09:00 PM",
+  ]);
+  await expect(firstDay.locator(".event-location")).toHaveText(
+    "Groom’s Residence",
+  );
+  await expect(firstDay.locator(".event-address")).toHaveText(
+    "Kandasar, School Sahi, Angul",
+  );
   await expect(page.locator(".gallery-item")).toHaveCount(3);
   await expect(page.locator("#days")).toHaveText(/^\d+$/);
   for (const image of await page.locator("main img").all()) {
@@ -456,9 +475,8 @@ test("family details, three venues, and the revised Reception are visible", asyn
     await expect(
       page.getByRole("link", { name: `Get directions to ${name}` }),
     ).toHaveAttribute("href", url);
-  await expect(page.locator("[data-rsvp-deadline]")).toHaveText(
-    "30 October 2026",
-  );
+  await expect(page.locator(".rsvp-deadline")).toBeHidden();
+  await expect(page.locator("[data-rsvp-deadline]")).toBeEmpty();
   await expect(page.locator('a[href^="tel:"]')).toHaveCount(0);
 });
 
@@ -945,6 +963,14 @@ test("Odia switch preserves entries, translates new RSVP feedback, and remembers
   await expect(
     page.locator('[data-event="reception"] .event-time'),
   ).toHaveText("୦୭:୦୦ ଅପରାହ୍ନ – ୧୧:୦୦ ଅପରାହ୍ନ");
+  await expect(page.locator('[data-event="wedding"] .event-date')).toHaveText(
+    "୨ ଡିସେମ୍ବର ୨୦୨୬",
+  );
+  await expect(page.locator('[data-event="reception"] .event-date')).toHaveText(
+    "୪ ଡିସେମ୍ବର ୨୦୨୬",
+  );
+  await expect(page.locator(".rsvp-deadline")).toBeHidden();
+  await expect(page.locator("[data-rsvp-deadline]")).toBeEmpty();
   await expect(page.locator("#guest-name")).toHaveValue("Taylor Guest");
   await expect(page.locator("#guest-message")).toHaveValue(
     "My original message — ଶୁଭେଚ୍ଛା",

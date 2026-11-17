@@ -203,8 +203,6 @@
     "without you.": "ଅଧୁରା।",
     "We can’t wait to celebrate with you. Let us know if you’ll be there to make our day a little more special.":
       "ଆପଣଙ୍କ ସହ ଉତ୍ସବ ପାଳନ ପାଇଁ ଆମେ ଅପେକ୍ଷାରତ। ଆପଣ ଆସୁଛନ୍ତି କି ନାହିଁ, ଦୟାକରି ଜଣାନ୍ତୁ।",
-    "Kindly reply by": "ଦୟାକରି ଏହି ତାରିଖ ସୁଦ୍ଧା ଜଣାନ୍ତୁ:",
-    "30 October 2026": "୩୦ ଅକ୍ଟୋବର ୨୦୨୬",
     "with love & a little anticipation": "ସ୍ନେହ ଓ ଅପେକ୍ଷାରେ",
     "We would love to hear from you.": "ଆପଣଙ୍କ ଖବର ପାଇଁ ଅପେକ୍ଷାରେ।",
     "Let us know if you’ll be joining us, and how many guests to expect. Our family is happy to help with any questions.":
@@ -296,10 +294,8 @@
     "Use the separate Google Maps links for Groom’s Residence, Sunita Aangan, and Crescent Convention Centre. For help, use the contact details shared with you privately.":
       "ବରଙ୍କ ବାସଭବନ, ସୁନୀତା ଆଙ୍ଗନ ଓ କ୍ରେସେଣ୍ଟ କନଭେନସନ୍ ସେଣ୍ଟର ପାଇଁ ଅଲଗା Google Maps ଲିଙ୍କ ବ୍ୟବହାର କରନ୍ତୁ। ସହାୟତା ପାଇଁ ବ୍ୟକ୍ତିଗତ ଭାବେ ଦିଆଯାଇଥିବା ଯୋଗାଯୋଗ ବିବରଣୀ ବ୍ୟବହାର କରନ୍ତୁ।",
     "How and when should I RSVP?": "କିପରି ଓ କେବେ ସୁଦ୍ଧା ଉପସ୍ଥିତି ଜଣାଇବି?",
-    "Please let us know by 30 October 2026. Fill in your name, an email address or phone number, your attendance choice, and the number of people joining you, then select Submit. Dietary preferences and a message are optional. Your response is saved privately for the couple.":
-      "୩୦ ଅକ୍ଟୋବର ୨୦୨୬ ସୁଦ୍ଧା ଜଣାନ୍ତୁ। ଆପଣଙ୍କ ନାମ, ଇମେଲ୍ ଠିକଣା କିମ୍ବା ଫୋନ୍ ନମ୍ବର, ଉପସ୍ଥିତିର ପସନ୍ଦ ଓ କେତେଜଣ ଆସିବେ ଲେଖି ‘ଦାଖଲ କରନ୍ତୁ’ ବାଛନ୍ତୁ। ଖାଦ୍ୟ ପସନ୍ଦ ଓ ସନ୍ଦେଶ ଇଚ୍ଛାଧୀନ। ଆପଣଙ୍କ ଉତ୍ତର କେବଳ ବରକନ୍ୟାଙ୍କ ପାଇଁ ଗୋପନୀୟ ଭାବେ ସଞ୍ଚୟ ହେବ।",
-    "Please let us know by 30 October 2026. Prepare your RSVP here, then choose the couple or a family member from your WhatsApp contacts and send it. You can also use the contact details shared privately with your invitation.":
-      "୩୦ ଅକ୍ଟୋବର ୨୦୨୬ ସୁଦ୍ଧା ଜଣାନ୍ତୁ। ଏଠାରେ ଉତ୍ତର ପ୍ରସ୍ତୁତ କରି WhatsApp ସମ୍ପର୍କ ତାଲିକାରୁ ବରକନ୍ୟା ବା ପରିବାରର ଜଣଙ୍କୁ ବାଛି ପଠାନ୍ତୁ। ନିମନ୍ତ୍ରଣ ସହ ବ୍ୟକ୍ତିଗତ ଭାବେ ଦିଆଯାଇଥିବା ଯୋଗାଯୋଗ ବିବରଣୀ ମଧ୍ୟ ବ୍ୟବହାର କରିପାରିବେ।",
+    "Fill in your name, an email address or phone number, your attendance choice, and the number of people joining you, then select Submit. Dietary preferences and a message are optional. Your response is saved privately for the couple.":
+      "ଆପଣଙ୍କ ନାମ, ଇମେଲ୍ ଠିକଣା କିମ୍ବା ଫୋନ୍ ନମ୍ବର, ଉପସ୍ଥିତିର ପସନ୍ଦ ଓ କେତେଜଣ ଆସିବେ ଲେଖି ‘ଦାଖଲ କରନ୍ତୁ’ ବାଛନ୍ତୁ। ଖାଦ୍ୟ ପସନ୍ଦ ଓ ସନ୍ଦେଶ ଇଚ୍ଛାଧୀନ। ଆପଣଙ୍କ ଉତ୍ତର କେବଳ ବରକନ୍ୟାଙ୍କ ପାଇଁ ଗୋପନୀୟ ଭାବେ ସଞ୍ଚୟ ହେବ।",
     "WE’RE HERE FOR YOU": "ଆମେ ଆପଣଙ୍କ ସହ ଅଛୁ",
     "Need a": "କିଛି",
     "little hand?": "ସହାୟତା ଦରକାର କି?",

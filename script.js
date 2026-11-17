@@ -135,7 +135,8 @@
   }
   text("[data-story-text]", config.story.text);
   text("[data-story-closing]", config.story.closing);
-  text("[data-rsvp-deadline]", config.rsvpDeadline);
+  text("[data-rsvp-deadline]", config.rsvpDeadline || "");
+  $(".rsvp-deadline").hidden = !config.rsvpDeadline;
   text("[data-hashtag]", config.hashtag);
   $("time[data-date-long]").dateTime = config.start;
   const monogram = $("[data-monogram]");
@@ -159,9 +160,17 @@
     if (photo.position) image.style.objectPosition = photo.position;
   });
 
-  config.schedule.forEach((event, index) => {
+  const scheduleDays = new Map();
+  config.schedule.forEach((event) => {
+    const day = formatDate(event.start);
+    if (!scheduleDays.has(day)) scheduleDays.set(day, []);
+    scheduleDays.get(day).push(event);
+  });
+  [...scheduleDays].forEach(([day, events], index) => {
+    const event = events[0];
+    const grouped = events.length > 1;
     const card = element("article", "event-card reveal");
-    card.dataset.event = event.id;
+    card.dataset.event = events.map((item) => item.id).join(" ");
     card.style.transitionDelay = `${index * 80}ms`;
     const venue = venueFor(event);
     const location = element("a", "event-location");
@@ -169,26 +178,33 @@
     location.target = "_blank";
     location.rel = "noopener noreferrer";
     location.append(icon("pin"), element("span", "", venue.name));
-    card.append(
-      icon(event.icon),
-      element("strong", "event-date", formatDate(event.start)),
-      element("h3", "", event.title),
-      element("p", "event-time", eventTime(event)),
-      element("p", "", event.text),
-    );
-    if (Array.isArray(event.program) && event.program.length) {
-      const list = element("ul", "event-program");
-      event.program.forEach((item) => {
-        const row = element("li", "event-program-item");
-        row.append(
-          element("span", "event-program-time", eventTime(item)),
-          element("span", "event-program-label", item.label),
-        );
-        list.append(row);
-      });
-      card.append(list);
-    }
-    card.append(element("p", "event-meals", event.meals), location);
+    if (!grouped) card.append(icon(event.icon));
+    card.append(element("strong", "event-date", day));
+    events.forEach((event) => {
+      const entry = grouped ? element("section", "event-subentry") : card;
+      if (grouped) entry.append(icon(event.icon));
+      entry.append(
+        element("h3", "", event.title),
+        element("p", "event-time", eventTime(event)),
+        element("p", "", event.text),
+      );
+      if (Array.isArray(event.program) && event.program.length) {
+        const list = element("ul", "event-program");
+        event.program.forEach((item) => {
+          const row = element("li", "event-program-item");
+          row.append(
+            element("span", "event-program-time", eventTime(item)),
+            element("span", "event-program-label", item.label),
+          );
+          list.append(row);
+        });
+        entry.append(list);
+      }
+      entry.append(element("p", "event-meals", event.meals));
+      if (grouped) card.append(entry);
+    });
+    card.append(location);
+    if (grouped) card.append(element("p", "event-address", venue.address));
     $("#schedule").append(card);
   });
   if (config.scheduleNote) {

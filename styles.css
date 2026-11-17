@@ -832,7 +832,7 @@ h1 > span {
   transform: translateY(-5px);
   border-color: #9ba68e;
 }
-.event-card > .icon {
+:is(.event-card, .event-subentry) > .icon {
   height: 43px;
   width: 43px;
   color: var(--gold);
@@ -850,7 +850,7 @@ h1 > span {
   font-size: 33px;
   margin-bottom: 14px;
 }
-.event-card > p:not(.event-time) {
+:is(.event-card, .event-subentry) > p:not(.event-time) {
   font-size: 14px;
   line-height: 1.9;
   max-width: 250px;
@@ -2005,7 +2005,7 @@ textarea {
   .event-card h3 {
     font-size: 28px;
   }
-  .event-card > p:not(.event-time) {
+  :is(.event-card, .event-subentry) > p:not(.event-time) {
     font-size: 13px;
   }
   .schedule {
@@ -2379,7 +2379,7 @@ textarea {
   .event-card {
     padding: 28px 30px;
   }
-  .event-card > .icon {
+  :is(.event-card, .event-subentry) > .icon {
     width: 37px;
     height: 37px;
     margin-bottom: 12px;
@@ -2388,7 +2388,7 @@ textarea {
     font-size: 33px;
     margin-bottom: 12px;
   }
-  .event-card > p:not(.event-time) {
+  :is(.event-card, .event-subentry) > p:not(.event-time) {
     font-size: 14px;
     max-width: 270px;
   }
@@ -3104,6 +3104,21 @@ textarea {
 .event-card h3 {
   font-size: 35px;
 }
+.event-subentry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 0;
+}
+.event-subentry + .event-subentry {
+  border-top: 1px solid var(--line);
+  margin-top: 24px;
+  padding-top: 24px;
+}
+.event-card > p.event-address {
+  margin: 4px 0 0;
+}
 .event-card .event-date {
   font-size: 18px;
   font-weight: 700;
@@ -3119,7 +3134,7 @@ textarea {
   letter-spacing: 0.2px;
   margin-bottom: 18px;
 }
-.event-card > p:not(.event-time) {
+:is(.event-card, .event-subentry) > p:not(.event-time) {
   max-width: none;
   font-size: 14px;
 }
@@ -3508,7 +3523,7 @@ textarea {
   .event-card .event-time {
     font-size: 12px;
   }
-  .event-card > p:not(.event-time) {
+  :is(.event-card, .event-subentry) > p:not(.event-time) {
     font-size: 13px;
   }
   .event-location {
@@ -3667,7 +3682,7 @@ textarea {
   .event-card h3 {
     font-size: 36px;
   }
-  .event-card > p:not(.event-time) {
+  :is(.event-card, .event-subentry) > p:not(.event-time) {
     font-size: 15px;
   }
   .event-card .event-time {
@@ -4290,7 +4305,7 @@ html[lang="or"] .rsvp-handwriting {
 }
 html[lang="or"] .hero-description,
 html[lang="or"] .story-copy > p:not(.eyebrow),
-html[lang="or"] .event-card > p:not(.event-time),
+html[lang="or"] :is(.event-card, .event-subentry) > p:not(.event-time),
 html[lang="or"] .rsvp-copy > p:not(.eyebrow),
 html[lang="or"] .guest-detail p {
   font-size: 16px;

@@ -296,6 +296,11 @@ img {
 .program-entry:last-child {
   border-bottom: 1px solid var(--line);
 }
+.program-subentry + .program-subentry {
+  border-top: 1px dashed var(--line);
+  margin-top: 6px;
+  padding-top: 6px;
+}
 .event-number {
   font: italic 21px/1.1 var(--serif);
   padding-top: 9px;

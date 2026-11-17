@@ -23,7 +23,7 @@ window.WEDDING = {
   end: "2026-12-03T05:00:00+05:30",
   timeZone: "Asia/Kolkata",
   celebrationDates: "1, 2 & 4 December 2026",
-  rsvpDeadline: "30 October 2026",
+  rsvpDeadline: "",
   city: "Odisha",
   primaryVenue: "marriage",
   venues: [
@@ -239,7 +239,7 @@ window.WEDDING = {
     {
       question: "How and when should I RSVP?",
       answer:
-        "Please let us know by 30 October 2026. Fill in your name, an email address or phone number, your attendance choice, and the number of people joining you, then select Submit. Dietary preferences and a message are optional. Your response is saved privately for the couple.",
+        "Fill in your name, an email address or phone number, your attendance choice, and the number of people joining you, then select Submit. Dietary preferences and a message are optional. Your response is saved privately for the couple.",
     },
   ],
   hashtag: "#AdityaAndPriti",

@@ -29,7 +29,7 @@ Visit <http://localhost:4173>. This runs Python’s local web server; you can al
 
 The four key celebrations are the Thread Ceremony and Haldi + Mangan (1 December), the Wedding (2 December), and the Reception (4 December). Each event card shows a per-day sub-timeline on the page (meals with menu items, plus Mangulti, Grand Lunch, travel to Sunita Aangan, Procession/Baraat, and the grand dinner on the wedding day). The Thread Ceremony day includes breakfast (puri & dal) and lunch; Haldi + Mangan includes evening refreshments and dinner. On the wedding day, breakfast (upma & dal) and lunch are at Groom’s Residence and the grand dinner is at Sunita Aangan. A short note marks 3 December as a relaxed day with breakfast, lunch, and dinner at Groom’s Residence. The Reception day includes breakfast, lunch, and the reception dinner. Only these four key celebrations appear in the Add-to-Calendar chooser and the downloadable .ics (the daily meals are not added as separate calendar entries).
 
-RSVP is requested by **30 October 2026**, using the on-page Submit form or the contact details shared privately. The deadline is displayed as a request; the form does not automatically close on that date.
+Guests can RSVP using the on-page Submit form or the contact details shared privately. No RSVP deadline is displayed while `rsvpDeadline` is empty.
 
 ## Edit your details
 

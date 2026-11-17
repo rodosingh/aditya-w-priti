@@ -60,10 +60,24 @@ async function main() {
   const contact = c.rsvp.phone
     ? `<a href="tel:${escape(c.rsvp.phone)}">${escape(c.rsvp.phoneDisplay || c.rsvp.phone)}</a>`
     : "<p>Contact details are shared privately.</p>";
-  const entries = c.schedule
-    .map((event, index) => {
-      const place = c.venues.find((item) => item.id === event.venueId);
-      return `<article class="program-entry"><span class="event-number">0${index + 1}</span><div><p class="event-date">${escape(date(event.start, { weekday: "long" }))}</p><h2>${escape(event.title)}</h2><p class="hours">${escape(hours(event))}</p><a class="venue" href="${escape(place.mapsUrl)}">${escape(place.name)} ↗</a><p class="meals">${escape(event.meals)}</p></div></article>`;
+  const programDays = new Map();
+  c.schedule.forEach((event) => {
+    const day = date(event.start, { weekday: "long" });
+    if (!programDays.has(day)) programDays.set(day, []);
+    programDays.get(day).push(event);
+  });
+  const entries = [...programDays]
+    .map(([day, events], index) => {
+      const place = c.venues.find((item) => item.id === events[0].venueId);
+      const location = `<a class="venue" href="${escape(place.mapsUrl)}">${escape(place.name)} ↗</a>`;
+      const grouped = events.length > 1;
+      const details = events
+        .map((event) => {
+          const body = `<h2>${escape(event.title)}</h2><p class="hours">${escape(hours(event))}</p>${grouped ? "" : location}<p class="meals">${escape(event.meals)}</p>`;
+          return grouped ? `<div class="program-subentry">${body}</div>` : body;
+        })
+        .join("");
+      return `<article class="program-entry"><span class="event-number">0${index + 1}</span><div><p class="event-date">${escape(day)}</p>${details}${grouped ? location : ""}</div></article>`;
     })
     .join("");
   // Use the webpage's fonts, palette, and actual botanical drawing so the two
@@ -128,7 +142,7 @@ async function main() {
       <h1>Traditions, togetherness<br><em>& a lifetime of love.</em></h1>
       <p class="dates">${escape(c.celebrationDates)} · ${escape(c.city)}</p>
       <div class="program">${entries}</div>
-      <div class="rsvp"><p class="eyebrow">YOUR PRESENCE IS OUR JOY</p><p>Kindly RSVP by <strong>${escape(c.rsvpDeadline)}</strong></p>${contact}<small>Tap a venue name for directions. All times are in India Standard Time.</small></div>
+      <div class="rsvp"><p class="eyebrow">YOUR PRESENCE IS OUR JOY</p>${c.rsvpDeadline ? `<p>Kindly RSVP by <strong>${escape(c.rsvpDeadline)}</strong></p>` : ""}${contact}<small>Tap a venue name for directions. All times are in India Standard Time.</small></div>
       <p class="closing">Your presence is our joy. Your blessings, our greatest gift.</p>
     </div>
     <p class="footer">WE LOOK FORWARD TO WELCOMING YOU WITH OUR FAMILIES <span>2 / 2</span></p>
