@@ -166,45 +166,76 @@
     if (!scheduleDays.has(day)) scheduleDays.set(day, []);
     scheduleDays.get(day).push(event);
   });
+  const buildProgram = (program) => {
+    const list = element("ul", "event-program");
+    program.forEach((item) => {
+      const row = element("li", "event-program-item");
+      row.append(
+        element("span", "event-program-time", eventTime(item)),
+        element("span", "event-program-label", item.label),
+      );
+      list.append(row);
+    });
+    return list;
+  };
   [...scheduleDays].forEach(([day, events], index) => {
-    const event = events[0];
-    const grouped = events.length > 1;
+    const primary = events[0];
+    const extras = events.slice(1);
+    const grouped = extras.length > 0;
     const card = element("article", "event-card reveal");
     card.dataset.event = events.map((item) => item.id).join(" ");
     card.style.transitionDelay = `${index * 80}ms`;
-    const venue = venueFor(event);
+    const venue = venueFor(primary);
+
+    // Shared bands (one per subgrid row) keep the three cards aligned:
+    // icon / date / primary body / meals / extras / venue.
+    card.append(icon(primary.icon));
+    card.append(element("strong", "event-date", day));
+
+    const primaryBody = element("div", "event-primary");
+    primaryBody.append(
+      element("h3", "", primary.title),
+      element("p", "event-time", eventTime(primary)),
+      element("p", "", primary.text),
+    );
+    if (Array.isArray(primary.program) && primary.program.length) {
+      primaryBody.append(buildProgram(primary.program));
+    }
+    card.append(primaryBody);
+
+    card.append(element("p", "event-meals", primary.meals));
+
+    // Additional same-day events (e.g. Haldi + Mangan) render as a nested
+    // sub-card that stays inside the day's box, after the primary meals line.
+    if (grouped) {
+      const extrasWrap = element("div", "event-extras");
+      extras.forEach((extra) => {
+        const sub = element("div", "event-subcard");
+        sub.append(icon(extra.icon));
+        sub.append(
+          element("h3", "event-subcard-title", extra.title),
+          element("p", "event-time", eventTime(extra)),
+          element("p", "", extra.text),
+        );
+        if (Array.isArray(extra.program) && extra.program.length) {
+          sub.append(buildProgram(extra.program));
+        }
+        sub.append(element("p", "event-meals", extra.meals));
+        extrasWrap.append(sub);
+      });
+      card.append(extrasWrap);
+    }
+
+    const venueWrap = element("div", "event-venue");
     const location = element("a", "event-location");
     location.href = venue.mapsUrl;
     location.target = "_blank";
     location.rel = "noopener noreferrer";
     location.append(icon("pin"), element("span", "", venue.name));
-    card.append(icon(event.icon));
-    card.append(element("strong", "event-date", day));
-    events.forEach((event, entryIndex) => {
-      const entry = grouped ? element("section", "event-subentry") : card;
-      if (grouped && entryIndex > 0) entry.append(icon(event.icon));
-      entry.append(
-        element("h3", "", event.title),
-        element("p", "event-time", eventTime(event)),
-        element("p", "", event.text),
-      );
-      if (Array.isArray(event.program) && event.program.length) {
-        const list = element("ul", "event-program");
-        event.program.forEach((item) => {
-          const row = element("li", "event-program-item");
-          row.append(
-            element("span", "event-program-time", eventTime(item)),
-            element("span", "event-program-label", item.label),
-          );
-          list.append(row);
-        });
-        entry.append(list);
-      }
-      entry.append(element("p", "event-meals", event.meals));
-      if (grouped) card.append(entry);
-    });
-    card.append(location);
-    if (grouped) card.append(element("p", "event-address", venue.address));
+    venueWrap.append(location);
+    if (grouped) venueWrap.append(element("p", "event-address", venue.address));
+    card.append(venueWrap);
+
     $("#schedule").append(card);
   });
   if (config.scheduleNote) {

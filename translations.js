@@ -16,6 +16,17 @@
     "The celebration": "ମାଙ୍ଗଳିକ କାର୍ଯ୍ୟକ୍ରମ",
     "The venues": "ସ୍ଥାନ",
     "Our moments": "ଆମ ସ୍ମୃତି",
+    Acknowledgement: "କୃତଜ୍ଞତା",
+    "WITH LOVE AND THANKS": "ସ୍ନେହ ଓ କୃତଜ୍ଞତା ସହ",
+    "With Gratitude": "କୃତଜ୍ଞତା ସହ",
+    "This celebration would not have been possible without my dearest brother and our shining star, Sandeep, and my family — my lifeline. Their boundless love, strength, and tireless devotion have shaped every moment of this journey.":
+      "ମୋର ପ୍ରିୟ ଭାଇ ଓ ଆମ ପରିବାରର ଉଜ୍ଜ୍ୱଳ ନକ୍ଷତ୍ର ସନ୍ଦୀପ, ଏବଂ ମୋ ଜୀବନର ଆଧାର ମୋ ପରିବାର ବିନା ଏହି ଉତ୍ସବ ସମ୍ଭବ ହୋଇନଥାନ୍ତା। ସେମାନଙ୍କର ଅସୀମ ସ୍ନେହ, ଶକ୍ତି ଓ ଅକ୍ଲାନ୍ତ ସମର୍ପଣ ଏହି ଯାତ୍ରାର ପ୍ରତ୍ୟେକ ମୁହୂର୍ତ୍ତକୁ ଗଢ଼ିଛି।",
+    "To all our relatives and friends who have showered us with love and blessings — thank you. Your warmth lives in every memory we make.":
+      "ଆମକୁ ସ୍ନେହ ଓ ଆଶୀର୍ବାଦରେ ଭରିଦେଇଥିବା ଆମ ସମସ୍ତ ଆତ୍ମୀୟ ଓ ବନ୍ଧୁମାନଙ୍କୁ — ଧନ୍ୟବାଦ। ଆପଣଙ୍କ ଆତ୍ମୀୟତା ଆମ ପ୍ରତ୍ୟେକ ସ୍ମୃତିରେ ବଞ୍ଚି ରହିଛି।",
+    "— With all my love and gratitude, Aditya":
+      "— ମୋର ସମସ୍ତ ସ୍ନେହ ଓ କୃତଜ୍ଞତା ସହ, ଆଦିତ୍ୟ",
+    "Aditya with his parents and his brother Sandeep, seated close together and smiling warmly at home":
+      "ଘରେ ଏକାଠି ବସି ହସୁଥିବା ଆଦିତ୍ୟ, ତାଙ୍କ ପିତାମାତା ଓ ଭାଇ ସନ୍ଦୀପ",
     "LITTLE MOMENTS. BIG FEELINGS.": "ଛୋଟ ଛୋଟ ମୁହୂର୍ତ୍ତ। ଅନେକ ଅନୁଭୂତି।",
     "This is": "ଏହି ଆମ",
     "our kind of love.": "ପ୍ରେମର କାହାଣୀ।",
