@@ -231,21 +231,13 @@
     link.setAttribute("aria-label", `Get directions to ${venue.name}`);
     link.append(icon("arrow"));
     const panel = element("div", "map-panel");
-    const marker = element("div", "map-marker");
-    marker.append(icon("pin"), element("p", "", venue.name));
-    const button = element("button", "map-load-button", "View interactive map");
-    button.type = "button";
-    button.setAttribute("aria-label", `View interactive map for ${venue.name}`);
-    button.addEventListener("click", () => {
-      const frame = document.createElement("iframe");
-      frame.title = `Map to ${venue.name}`;
-      frame.src = `https://maps.google.com/maps?q=${encodeURIComponent(venue.mapQuery)}&z=15&output=embed`;
-      frame.referrerPolicy = "no-referrer-when-downgrade";
-      frame.allowFullscreen = true;
-      panel.replaceChildren(frame);
-      frame.addEventListener("load", () => frame.focus(), { once: true });
-    });
-    panel.append(marker, button);
+    const frame = document.createElement("iframe");
+    frame.title = `Map to ${venue.name}`;
+    frame.src = `https://maps.google.com/maps?q=${encodeURIComponent(venue.mapQuery)}&z=15&output=embed`;
+    frame.loading = "lazy";
+    frame.referrerPolicy = "no-referrer-when-downgrade";
+    frame.allowFullscreen = true;
+    panel.append(frame);
     card.append(
       element("p", "eyebrow", `VENUE 0${index + 1}`),
       element("h3", "", venue.name),

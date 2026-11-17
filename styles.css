@@ -817,6 +817,7 @@ h1 > span {
   grid-template-columns: repeat(3, 1fr);
   gap: 26px;
   position: relative;
+  align-items: start;
 }
 .event-card {
   padding: 34px 28px 31px;
@@ -854,7 +855,7 @@ h1 > span {
   font-size: 14px;
   line-height: 1.9;
   max-width: 250px;
-  margin: auto;
+  margin: 0 auto;
 }
 .event-location {
   display: flex;

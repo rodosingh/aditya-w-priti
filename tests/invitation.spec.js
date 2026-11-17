@@ -390,7 +390,7 @@ test("calendar choices open Google and Outlook drafts and download an Apple even
   await expect(dialog).toBeHidden();
 });
 
-test("Download Invitation opens the PDF in a new tab from both links", async ({
+test("Download Invitation opens the PDF in a new tab from the footer link", async ({
   page,
   context,
 }) => {
@@ -419,7 +419,7 @@ test("Download Invitation opens the PDF in a new tab from both links", async ({
         language === "en" ? "Download Invitation" : "ନିମନ୍ତ୍ରଣ ପତ୍ର ଡାଉନଲୋଡ୍",
       exact: true,
     });
-    await expect(links).toHaveCount(2);
+    await expect(links).toHaveCount(1);
     for (const link of await links.all()) {
       await expect(link).toHaveAttribute(
         "href",
@@ -755,19 +755,11 @@ test("external RSVP, contact links, and the wedding map use configured values", 
   await expect(
     page.getByRole("link", { name: "Get directions to Sunita Aangan" }),
   ).toHaveAttribute("href", "https://maps.app.goo.gl/kuVFzMVT9Q6yqLRt9");
-  await expect(page.locator(".map-panel iframe")).toHaveCount(0);
-  await page.route("https://maps.google.com/**", (route) =>
-    route.fulfill({
-      contentType: "text/html",
-      body: "<html><body>Map test</body></html>",
-    }),
-  );
-  await page
-    .getByRole("button", {
-      name: "View interactive map for Sunita Aangan",
-      exact: true,
-    })
-    .click();
+  // The interactive map now loads by default for every venue, with no toggle.
+  await expect(page.locator(".map-panel iframe")).toHaveCount(3);
+  await expect(
+    page.getByRole("button", { name: /View interactive map/ }),
+  ).toHaveCount(0);
   await expect(page.locator('[data-venue="marriage"] iframe')).toHaveAttribute(
     "src",
     /q=20.4966751%2C85.9274134/,
