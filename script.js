@@ -178,11 +178,11 @@
     location.target = "_blank";
     location.rel = "noopener noreferrer";
     location.append(icon("pin"), element("span", "", venue.name));
-    if (!grouped) card.append(icon(event.icon));
+    card.append(icon(event.icon));
     card.append(element("strong", "event-date", day));
-    events.forEach((event) => {
+    events.forEach((event, entryIndex) => {
       const entry = grouped ? element("section", "event-subentry") : card;
-      if (grouped) entry.append(icon(event.icon));
+      if (grouped && entryIndex > 0) entry.append(icon(event.icon));
       entry.append(
         element("h3", "", event.title),
         element("p", "event-time", eventTime(event)),

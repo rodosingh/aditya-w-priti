@@ -65,11 +65,11 @@ window.WEDDING = {
       end: "2026-12-01T17:00:00+05:30",
       venueId: "residence",
       text: "An auspicious beginning, with sacred rituals and the blessings of our loved ones.",
-      meals: "Breakfast (puri & dal) and lunch served.",
+      meals: "Breakfast and Grand Lunch served.",
       icon: "sun",
       program: [
-        { start: "2026-12-01T07:00:00+05:30", end: "2026-12-01T09:00:00+05:30", label: "Breakfast (puri & dal)" },
-        { start: "2026-12-01T13:00:00+05:30", end: "2026-12-01T15:00:00+05:30", label: "Lunch" },
+        { start: "2026-12-01T07:00:00+05:30", end: "2026-12-01T09:00:00+05:30", label: "Breakfast" },
+        { start: "2026-12-01T13:00:00+05:30", end: "2026-12-01T15:00:00+05:30", label: "Grand Lunch" },
       ],
     },
     {
@@ -89,12 +89,11 @@ window.WEDDING = {
       end: "2026-12-03T05:00:00+05:30",
       venueId: "marriage",
       text: "Join us as we celebrate our marriage in the warmth of Odia tradition.",
-      meals: "Breakfast & lunch at Groom’s Residence. Dinner at Sunita Aangan.",
+      meals: "Breakfast at Groom’s Residence. Dinner at Sunita Aangan.",
       icon: "rings",
       program: [
-        { start: "2026-12-02T07:00:00+05:30", end: "2026-12-02T09:00:00+05:30", label: "Breakfast at Groom’s Residence (upma & dal)" },
+        { start: "2026-12-02T07:00:00+05:30", end: "2026-12-02T09:00:00+05:30", label: "Breakfast" },
         { start: "2026-12-02T10:00:00+05:30", end: "2026-12-02T12:00:00+05:30", label: "Mangulti" },
-        { start: "2026-12-02T13:00:00+05:30", end: "2026-12-02T15:00:00+05:30", label: "Grand Lunch" },
         { start: "2026-12-02T15:00:00+05:30", end: "2026-12-02T18:00:00+05:30", label: "Travel to Sunita Aangan" },
         { start: "2026-12-02T19:00:00+05:30", end: "2026-12-02T22:00:00+05:30", label: "Procession / Baraat" },
         { start: "2026-12-02T22:00:00+05:30", end: null, label: "Grand Dinner at Sunita Aangan" },
@@ -112,7 +111,7 @@ window.WEDDING = {
       program: [
         { start: "2026-12-04T07:00:00+05:30", end: "2026-12-04T09:00:00+05:30", label: "Breakfast" },
         { start: "2026-12-04T13:00:00+05:30", end: "2026-12-04T15:00:00+05:30", label: "Lunch" },
-        { start: "2026-12-04T19:00:00+05:30", end: "2026-12-04T23:00:00+05:30", label: "Reception dinner at Crescent Convention Centre" },
+        { start: "2026-12-04T19:00:00+05:30", end: "2026-12-04T23:00:00+05:30", label: "Reception dinner" },
       ],
     },
   ],
@@ -229,7 +228,7 @@ window.WEDDING = {
     {
       question: "Where are the wedding-day meals?",
       answer:
-        "On 2 December, breakfast and lunch are at Groom’s Residence, and dinner is at Sunita Aangan, the marriage hall. The Thread Ceremony includes breakfast (puri & dal) and lunch; Haldi + Mangan includes evening refreshments and dinner. On 3 December, meals are served at Groom’s Residence. The Reception on 4 December includes breakfast, lunch, and the reception dinner.",
+        "On 2 December, breakfast is at Groom’s Residence, and dinner is at Sunita Aangan, the marriage hall. The Thread Ceremony includes breakfast and a grand lunch; Haldi + Mangan includes evening refreshments and dinner. On 3 December, meals are served at Groom’s Residence. The Reception on 4 December includes breakfast, lunch, and the reception dinner.",
     },
     {
       question: "How do I find the venues?",
