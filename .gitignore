@@ -6,6 +6,8 @@ site/
 
 # Design references stay on this computer. Original couple photos are tracked.
 /custom-images/
+videos/
+video-edit/
 
 # Local credentials and editor files do not belong in the repository.
 .env

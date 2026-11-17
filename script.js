@@ -175,11 +175,26 @@
       element("h3", "", event.title),
       element("p", "event-time", eventTime(event)),
       element("p", "", event.text),
-      element("p", "event-meals", event.meals),
-      location,
     );
+    if (Array.isArray(event.program) && event.program.length) {
+      const list = element("ul", "event-program");
+      event.program.forEach((item) => {
+        const row = element("li", "event-program-item");
+        row.append(
+          element("span", "event-program-time", eventTime(item)),
+          element("span", "event-program-label", item.label),
+        );
+        list.append(row);
+      });
+      card.append(list);
+    }
+    card.append(element("p", "event-meals", event.meals), location);
     $("#schedule").append(card);
   });
+  if (config.scheduleNote) {
+    const note = element("p", "schedule-note", config.scheduleNote);
+    $("#schedule").insertAdjacentElement("afterend", note);
+  }
 
   config.details.forEach((detail) => {
     const card = element("article", "guest-detail reveal");

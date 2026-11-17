@@ -126,20 +126,38 @@
       "ଶ୍ରୀମତୀ ଦୀପାଳି ଓ ଶ୍ରୀ ଦିଲେଶ୍ୱର ସିଂହଙ୍କ ସୁପୁତ୍ର",
     "D/o Mrs Kalpana & Mr Harishchandra Mohapatra":
       "ଶ୍ରୀମତୀ କଳ୍ପନା ଓ ଶ୍ରୀ ହରିଶ୍ଚନ୍ଦ୍ର ମହାପାତ୍ରଙ୍କ ସୁକନ୍ୟା",
-    "THREE CELEBRATIONS. A LIFETIME OF MEMORIES.":
-      "ତିନୋଟି ଉତ୍ସବ। ସାରା ଜୀବନର ସ୍ମୃତି।",
+    "FOUR CELEBRATIONS. A LIFETIME OF MEMORIES.":
+      "ଚାରୋଟି ଉତ୍ସବ। ସାରା ଜୀବନର ସ୍ମୃତି।",
     "Let’s make it": "ଆସନ୍ତୁ, ଏହାକୁ କରିବା",
     "unforgettable.": "ଅବିସ୍ମରଣୀୟ।",
     "Sacred rituals, joyful gatherings, and the warmth of our loved ones.":
       "ପବିତ୍ର ରୀତିନୀତି, ଆନନ୍ଦମୟ ମିଳନ ଓ ଆତ୍ମୀୟଜନଙ୍କ ସ୍ନେହ।",
     "1, 2 & 4 December 2026": "୧, ୨ ଓ ୪ ଡିସେମ୍ବର ୨୦୨୬",
     "Thread Ceremony": "ବ୍ରତୋପନୟନ",
+    "Haldi + Mangan": "ହଳଦୀ ଓ ମାଙ୍ଗଣ",
     Wedding: "ଶୁଭ ବିବାହ",
-    "Grand Dinner": "ପ୍ରୀତିଭୋଜନ",
+    "Reception": "ପ୍ରୀତିଭୋଜନ",
+    "Breakfast (puri & dal)": "ଜଳଖିଆ (ପୁରି ଓ ଡାଲି)",
+    "Breakfast": "ଜଳଖିଆ",
+    "Lunch": "ମଧ୍ୟାହ୍ନଭୋଜନ",
+    "Breakfast at Groom’s Residence (upma & dal)": "ବରଙ୍କ ବାସଭବନରେ ଜଳଖିଆ (ଉପମା ଓ ଡାଲି)",
+    "Mangulti": "ମାଙ୍ଗୁଳତି",
+    "Grand Lunch": "ବିଶେଷ ମଧ୍ୟାହ୍ନଭୋଜନ",
+    "Travel to Sunita Aangan": "ସୁନୀତା ଆଙ୍ଗନକୁ ଯାତ୍ରା",
+    "Procession / Baraat": "ବରଯାତ୍ରା",
+    "Grand Dinner at Sunita Aangan": "ସୁନୀତା ଆଙ୍ଗନରେ ବିଶେଷ ରାତ୍ରିଭୋଜନ",
+    "Reception dinner at Crescent Convention Centre": "କ୍ରେସେଣ୍ଟ କନଭେନସନ୍ ସେଣ୍ଟରରେ ପ୍ରୀତିଭୋଜନ",
+    "Breakfast (puri & dal) and lunch served.": "ଜଳଖିଆ (ପୁରି ଓ ଡାଲି) ଓ ମଧ୍ୟାହ୍ନଭୋଜନର ବ୍ୟବସ୍ଥା ରହିଛି।",
+    "Breakfast, lunch, and the reception dinner will be served.": "ଜଳଖିଆ, ମଧ୍ୟାହ୍ନଭୋଜନ ଓ ପ୍ରୀତିଭୋଜନର ବ୍ୟବସ୍ଥା ରହିଛି।",
+    "On 3 December, between the wedding and the reception, breakfast, lunch, and dinner are served at Groom’s Residence.": "୩ ଡିସେମ୍ବରରେ, ବିବାହ ଓ ପ୍ରୀତିଭୋଜନ ମଧ୍ୟରେ, ବରଙ୍କ ବାସଭବନରେ ଜଳଖିଆ, ମଧ୍ୟାହ୍ନଭୋଜନ ଓ ରାତ୍ରିଭୋଜନର ବ୍ୟବସ୍ଥା ରହିଛି।",
     "An auspicious beginning, with sacred rituals and the blessings of our loved ones.":
       "ପବିତ୍ର ରୀତିନୀତି ଓ ଆତ୍ମୀୟଜନଙ୍କ ଆଶୀର୍ବାଦରେ ଏକ ମାଙ୍ଗଳିକ ଶୁଭାରମ୍ଭ।",
-    "Breakfast, lunch & dinner accompanied.":
-      "ଜଳଖିଆ, ମଧ୍ୟାହ୍ନ ଓ ରାତ୍ରିଭୋଜନର ବ୍ୟବସ୍ଥା ରହିଛି।",
+    "Breakfast & lunch will be served.":
+      "ଜଳଖିଆ ଓ ମଧ୍ୟାହ୍ନଭୋଜନର ବ୍ୟବସ୍ଥା ରହିଛି।",
+    "An evening of turmeric, mehndi, and joyful moments with our loved ones.":
+      "ହଳଦୀ, ମେହେନ୍ଦି ଓ ଆତ୍ମୀୟଜନଙ୍କ ସହ ଆନନ୍ଦମୟ ମୁହୂର୍ତ୍ତର ଏକ ସନ୍ଧ୍ୟା।",
+    "Evening refreshments & dinner will be served.":
+      "ସନ୍ଧ୍ୟା ଜଳଖିଆ ଓ ରାତ୍ରିଭୋଜନର ବ୍ୟବସ୍ଥା ରହିଛି।",
     "Join us as we celebrate our marriage in the warmth of Odia tradition.":
       "ଓଡ଼ିଆ ପରମ୍ପରାରେ ଆୟୋଜିତ ଆମ ବିବାହ ଉତ୍ସବରେ ଯୋଗ ଦିଅନ୍ତୁ।",
     "Breakfast & lunch at Groom’s Residence. Dinner at Sunita Aangan.":
@@ -158,10 +176,13 @@
     "Groom’s Residence": "ବରଙ୍କ ବାସଭବନ",
     "Sunita Aangan": "ସୁନୀତା ଆଙ୍ଗନ",
     "Crescent Convention Centre": "କ୍ରେସେଣ୍ଟ କନଭେନସନ୍ ସେଣ୍ଟର",
-    "Thread ceremony · Wedding-day breakfast & lunch":
-      "ବ୍ରତୋପନୟନ · ବିବାହ ଦିନର ଜଳଖିଆ ଓ ମଧ୍ୟାହ୍ନଭୋଜନ",
+    "Kandasar, School Sahi, Angul": "କନ୍ଦସର, ସ୍କୁଲ ସାହି, ଅନୁଗୁଳ",
+    "Near Jagatpur Police Station, Jagatpur, Cuttack": "ଜଗତପୁର ପୋଲିସ ଷ୍ଟେସନ ନିକଟରେ, ଜଗତପୁର, କଟକ",
+    "Caltax Chhak, Angul": "କାଲଟେକ୍ସ ଛକ, ଅନୁଗୁଳ",
+    "Thread ceremony · Haldi + Mangan · Wedding-day breakfast & lunch":
+      "ବ୍ରତୋପନୟନ · ହଳଦୀ ଓ ମାଙ୍ଗଣ · ବିବାହ ଦିନର ଜଳଖିଆ ଓ ମଧ୍ୟାହ୍ନଭୋଜନ",
     "Wedding ceremony · 2 December": "ବିବାହ ଉତ୍ସବ · ୨ ଡିସେମ୍ବର",
-    "Grand Dinner · 4 December": "ପ୍ରୀତିଭୋଜନ · ୪ ଡିସେମ୍ବର",
+    "Reception · 4 December": "ପ୍ରୀତିଭୋଜନ · ୪ ଡିସେମ୍ବର",
     "Please follow the exact location shared on Google Maps.":
       "ଦୟାକରି Google Maps ରେ ଦିଆଯାଇଥିବା ସଠିକ୍ ସ୍ଥାନ ଦେଖନ୍ତୁ।",
     "Jagatpur, Cuttack, Odisha": "ଜଗତପୁର, କଟକ, ଓଡ଼ିଶା",
@@ -266,11 +287,11 @@
     "a message away.": "ଆମକୁ ସନ୍ଦେଶ ପଠାନ୍ତୁ।",
     "Get in touch": "ଯୋଗାଯୋଗ କରନ୍ତୁ",
     "Which dates should I keep free?": "କେଉଁ ତାରିଖଗୁଡ଼ିକ ମନେ ରଖିବି?",
-    "The Thread Ceremony is on 1 December, the Wedding is on 2 December and continues until 5:00 AM on 3 December, and the Grand Dinner is on 4 December 2026. The full program and each venue are listed above.":
-      "୧ ଡିସେମ୍ବରରେ ବ୍ରତୋପନୟନ, ୨ ଡିସେମ୍ବରରେ ବିବାହ (୩ ଡିସେମ୍ବର ଭୋର ୫ଟା ପର୍ଯ୍ୟନ୍ତ) ଏବଂ ୪ ଡିସେମ୍ବର ୨୦୨୬ରେ ପ୍ରୀତିଭୋଜନ। ସମ୍ପୂର୍ଣ୍ଣ କାର୍ଯ୍ୟକ୍ରମ ଓ ସ୍ଥାନ ଉପରେ ଦିଆଯାଇଛି।",
+    "The Thread Ceremony is on 1 December, followed by Haldi + Mangan that evening. The Wedding is on 2 December and continues until 5:00 AM on 3 December. 3 December is a relaxed day with meals at Groom’s Residence, and the Reception is on 4 December 2026. The full program and each venue are listed above.":
+      "୧ ଡିସେମ୍ବରରେ ବ୍ରତୋପନୟନ, ତା’ପରେ ସେହିଦିନ ସନ୍ଧ୍ୟାରେ ହଳଦୀ ଓ ମାଙ୍ଗଣ। ୨ ଡିସେମ୍ବରରେ ବିବାହ, ଯାହା ୩ ଡିସେମ୍ବର ଭୋର ୫ଟା ପର୍ଯ୍ୟନ୍ତ ଚାଲିବ। ୩ ଡିସେମ୍ବର ଏକ ଆରାମଦାୟକ ଦିନ, ବରଙ୍କ ବାସଭବନରେ ଭୋଜନର ବ୍ୟବସ୍ଥା, ଏବଂ ୪ ଡିସେମ୍ବର ୨୦୨୬ରେ ପ୍ରୀତିଭୋଜନ। ସମ୍ପୂର୍ଣ୍ଣ କାର୍ଯ୍ୟକ୍ରମ ଓ ପ୍ରତ୍ୟେକ ସ୍ଥାନ ଉପରେ ଦିଆଯାଇଛି।",
     "Where are the wedding-day meals?": "ବିବାହ ଦିନ ଭୋଜନ କେଉଁଠାରେ ହେବ?",
-    "On 2 December, breakfast and lunch are at Groom’s Residence, and dinner is at Sunita Aangan, the marriage hall. Breakfast, lunch, and dinner accompany the Thread Ceremony and Grand Dinner celebrations.":
-      "୨ ଡିସେମ୍ବରରେ ବରଙ୍କ ବାସଭବନରେ ଜଳଖିଆ ଓ ମଧ୍ୟାହ୍ନଭୋଜନ, ସୁନୀତା ଆଙ୍ଗନ ବିବାହ ମଣ୍ଡପରେ ରାତ୍ରିଭୋଜନ। ବ୍ରତୋପନୟନ ଓ ପ୍ରୀତିଭୋଜନ ଦିନ ଜଳଖିଆ, ମଧ୍ୟାହ୍ନ ଓ ରାତ୍ରିଭୋଜନର ବ୍ୟବସ୍ଥା ରହିଛି।",
+    "On 2 December, breakfast and lunch are at Groom’s Residence, and dinner is at Sunita Aangan, the marriage hall. The Thread Ceremony includes breakfast (puri & dal) and lunch; Haldi + Mangan includes evening refreshments and dinner. On 3 December, meals are served at Groom’s Residence. The Reception on 4 December includes breakfast, lunch, and the reception dinner.":
+      "୨ ଡିସେମ୍ବରରେ ବରଙ୍କ ବାସଭବନରେ ଜଳଖିଆ ଓ ମଧ୍ୟାହ୍ନଭୋଜନ, ଏବଂ ବିବାହ ମଣ୍ଡପ ସୁନୀତା ଆଙ୍ଗନରେ ରାତ୍ରିଭୋଜନ। ବ୍ରତୋପନୟନରେ ଜଳଖିଆ (ପୁରି ଓ ଡାଲି) ଓ ମଧ୍ୟାହ୍ନଭୋଜନ; ହଳଦୀ ଓ ମାଙ୍ଗଣରେ ସନ୍ଧ୍ୟା ଜଳଖିଆ ଓ ରାତ୍ରିଭୋଜନ। ୩ ଡିସେମ୍ବରରେ ବରଙ୍କ ବାସଭବନରେ ଭୋଜନ। ୪ ଡିସେମ୍ବରର ପ୍ରୀତିଭୋଜନରେ ଜଳଖିଆ, ମଧ୍ୟାହ୍ନଭୋଜନ ଓ ପ୍ରୀତିଭୋଜନ।",
     "How do I find the venues?": "ଉତ୍ସବ ସ୍ଥଳ କିପରି ଖୋଜିବି?",
     "Use the separate Google Maps links for Groom’s Residence, Sunita Aangan, and Crescent Convention Centre. For help, use the contact details shared with you privately.":
       "ବରଙ୍କ ବାସଭବନ, ସୁନୀତା ଆଙ୍ଗନ ଓ କ୍ରେସେଣ୍ଟ କନଭେନସନ୍ ସେଣ୍ଟର ପାଇଁ ଅଲଗା Google Maps ଲିଙ୍କ ବ୍ୟବହାର କରନ୍ତୁ। ସହାୟତା ପାଇଁ ବ୍ୟକ୍ତିଗତ ଭାବେ ଦିଆଯାଇଥିବା ଯୋଗାଯୋଗ ବିବରଣୀ ବ୍ୟବହାର କରନ୍ତୁ।",
@@ -452,6 +473,9 @@
     config.schedule.forEach((event) => {
       odia[formatDate(event.start, "en-GB")] = formatDate(event.start, "or-IN");
       odia[eventTime(event, "en-GB")] = eventTime(event, "or-IN");
+      (event.program || []).forEach((item) => {
+        odia[eventTime(item, "en-GB")] = eventTime(item, "or-IN");
+      });
       for (const provider of ["Google Calendar", "Outlook"]) {
         odia[`Add ${event.title} to ${provider}`] =
           `${odia[event.title] || event.title} ${odia[provider] || provider}ରେ ଯୋଡ଼ନ୍ତୁ`;

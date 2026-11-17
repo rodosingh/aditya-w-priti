@@ -18,15 +18,16 @@ Visit <http://localhost:4173>. This runs Python’s local web server; you can al
 
 ## Current wedding details
 
-| Celebration     | Date and time, India Standard Time            | Venue                            |
-| --------------- | --------------------------------------------- | -------------------------------- |
-| Thread Ceremony | 1 December 2026, 6:00 AM–5:00 PM              | Groom’s Residence                |
-| Wedding         | 2 December 2026, 6:00 PM–5:00 AM next morning | Sunita Aangan, Jagatpur, Cuttack |
-| Grand Dinner    | 4 December 2026, 7:00 PM–midnight             | Crescent Convention Centre       |
+| Celebration     | Date and time, India Standard Time            | Venue                                                          |
+| --------------- | --------------------------------------------- | -------------------------------------------------------------- |
+| Thread Ceremony | 1 December 2026, 9:00 AM–5:00 PM              | Groom’s Residence · Kandasar, School Sahi, Angul               |
+| Haldi + Mangan  | 1 December 2026, 6:00 PM–9:00 PM              | Groom’s Residence · Kandasar, School Sahi, Angul               |
+| Wedding         | 2 December 2026, 6:00 PM–5:00 AM next morning | Sunita Aangan, Near Jagatpur Police Station, Jagatpur, Cuttack |
+| Reception       | 4 December 2026, 7:00 PM–11:00 PM             | Crescent Convention Centre, Caltax Chhak, Angul                |
 
-**The Wedding is on 2 December and the Grand Dinner is on 4 December.** The page, calendar chooser, and PDF emphasize each event’s start date. The Wedding time reads “6:00 PM–5:00 AM next morning” and Grand Dinner reads “7:00 PM–midnight”, without parenthetical dates. Calendar timestamps still preserve the overnight endings: Wedding ends on 3 December, and Grand Dinner ends at the start of 5 December. Grand Dinner’s Google Calendar, Outlook, and Apple/.ics entries use UTC timestamps `20261204T133000Z`–`20261204T183000Z`.
+**The Wedding is on 2 December and the Reception is on 4 December.** The page, calendar chooser, and PDF emphasize each event’s start date. The Wedding time reads “6:00 PM–5:00 AM next morning” and the Reception reads “7:00 PM–11:00 PM”. Calendar timestamps preserve the Wedding’s overnight ending on 3 December. The Reception’s Google Calendar, Outlook, and Apple/.ics entries use UTC timestamps `20261204T133000Z`–`20261204T173000Z`.
 
-The Thread Ceremony includes breakfast, lunch, and dinner. On the wedding day, breakfast and lunch are at Groom’s Residence and dinner is at Sunita Aangan. The Grand Dinner card retains the supplied note that breakfast, lunch, and dinner accompany the day’s celebrations; individual daytime meal times are not specified.
+The four key celebrations are the Thread Ceremony and Haldi + Mangan (1 December), the Wedding (2 December), and the Reception (4 December). Each event card shows a per-day sub-timeline on the page (meals with menu items, plus Mangulti, Grand Lunch, travel to Sunita Aangan, Procession/Baraat, and the grand dinner on the wedding day). The Thread Ceremony day includes breakfast (puri & dal) and lunch; Haldi + Mangan includes evening refreshments and dinner. On the wedding day, breakfast (upma & dal) and lunch are at Groom’s Residence and the grand dinner is at Sunita Aangan. A short note marks 3 December as a relaxed day with breakfast, lunch, and dinner at Groom’s Residence. The Reception day includes breakfast, lunch, and the reception dinner. Only these four key celebrations appear in the Add-to-Calendar chooser and the downloadable .ics (the daily meals are not added as separate calendar entries).
 
 RSVP is requested by **30 October 2026**, using the on-page Submit form or the contact details shared privately. The deadline is displayed as a request; the form does not automatically close on that date.
 
@@ -113,11 +114,11 @@ Edit the English/Odia pairs in `translations.js` when changing the corresponding
 
 ### Adding celebrations to a calendar
 
-**Add to calendar** opens a chooser for the Thread Ceremony, Wedding, and Grand Dinner. Each celebration offers:
+**Add to calendar** opens a chooser for the Thread Ceremony, Haldi + Mangan, Wedding, and Reception. Each celebration offers:
 
 - **Google Calendar** and **Outlook**: open an editable event in a new tab, with the title, date, time, venue, meal details, and map link filled in. Guests finish saving in their own calendar.
 - **Apple / iPhone**: download that celebration as an `.ics` file, suitable for importing into Apple Calendar or another calendar app.
-- **Download all celebrations (.ics)**: download one file containing all three events, named `Aditya-Priti-celebrations.ics`.
+- **Download all celebrations (.ics)**: download one file containing all four events, named `Aditya-Priti-celebrations.ics`.
 
 Calendar timestamps use UTC so each app handles the guest’s local time correctly. The chooser displays India Standard Time and preserves the Wedding’s ending on 3 December. Event drafts and .ics files use English details in both page languages. The chooser supports keyboard navigation, Escape to close, and returning focus to the calendar button.
 

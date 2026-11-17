@@ -3129,6 +3129,44 @@ textarea {
   padding-top: 17px;
   font-size: 13px !important;
 }
+.event-card .event-program {
+  list-style: none;
+  width: 100%;
+  margin: 18px 0 0;
+  padding: 0;
+  text-align: left;
+}
+.event-program-item {
+  display: flex;
+  gap: 12px;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 5px 0;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.event-program-item + .event-program-item {
+  border-top: 1px dashed var(--line);
+}
+.event-program-time {
+  flex: 0 0 auto;
+  font-weight: 700;
+  color: #68543f;
+  white-space: nowrap;
+}
+.event-program-label {
+  flex: 1 1 auto;
+  min-width: 0;
+  text-align: right;
+}
+.schedule-note {
+  margin: 26px auto 0;
+  max-width: 62ch;
+  text-align: center;
+  font-size: 15px;
+  line-height: 1.6;
+  color: #68543f;
+}
 .event-location {
   font-size: 13px;
   line-height: 1.5;

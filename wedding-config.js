@@ -4,7 +4,7 @@
  * run `npm run invitation` to refresh the downloadable PDF as well.
  *
  * rsvp.mode: "google-sheets", "phone", "whatsapp", "email", "formspree", "external", or "demo".
- * The Grand Dinner runs from 7 PM on 4 December to midnight on 5 December.
+ * The Reception runs from 7 PM to 11 PM on 4 December.
  * All timestamps include India's UTC offset; the Wedding ends on 3 December.
  */
 window.WEDDING = {
@@ -30,8 +30,8 @@ window.WEDDING = {
     {
       id: "residence",
       name: "Groom’s Residence",
-      purpose: "Thread ceremony · Wedding-day breakfast & lunch",
-      address: "Please follow the exact location shared on Google Maps.",
+      purpose: "Thread ceremony · Haldi + Mangan · Wedding-day breakfast & lunch",
+      address: "Kandasar, School Sahi, Angul",
       mapQuery: "20.842139,85.129827",
       mapsUrl: "https://maps.app.goo.gl/yYMJiG3vR6FQppgM9",
     },
@@ -39,15 +39,15 @@ window.WEDDING = {
       id: "marriage",
       name: "Sunita Aangan",
       purpose: "Wedding ceremony · 2 December",
-      address: "Jagatpur, Cuttack, Odisha",
+      address: "Near Jagatpur Police Station, Jagatpur, Cuttack",
       mapQuery: "20.4966751,85.9274134",
       mapsUrl: "https://maps.app.goo.gl/kuVFzMVT9Q6yqLRt9",
     },
     {
       id: "reception",
       name: "Crescent Convention Centre",
-      purpose: "Grand Dinner · 4 December",
-      address: "Please follow the exact location shared on Google Maps.",
+      purpose: "Reception · 4 December",
+      address: "Caltax Chhak, Angul",
       mapQuery: "20.8436538,85.1128962",
       mapsUrl: "https://maps.app.goo.gl/VFryEtyFjndNprsv8",
     },
@@ -61,12 +61,26 @@ window.WEDDING = {
     {
       id: "thread-ceremony",
       title: "Thread Ceremony",
-      start: "2026-12-01T06:00:00+05:30",
+      start: "2026-12-01T09:00:00+05:30",
       end: "2026-12-01T17:00:00+05:30",
       venueId: "residence",
       text: "An auspicious beginning, with sacred rituals and the blessings of our loved ones.",
-      meals: "Breakfast, lunch & dinner accompanied.",
+      meals: "Breakfast (puri & dal) and lunch served.",
       icon: "sun",
+      program: [
+        { start: "2026-12-01T07:00:00+05:30", end: "2026-12-01T09:00:00+05:30", label: "Breakfast (puri & dal)" },
+        { start: "2026-12-01T13:00:00+05:30", end: "2026-12-01T15:00:00+05:30", label: "Lunch" },
+      ],
+    },
+    {
+      id: "haldi-mangan",
+      title: "Haldi + Mangan",
+      start: "2026-12-01T18:00:00+05:30",
+      end: "2026-12-01T21:00:00+05:30",
+      venueId: "residence",
+      text: "An evening of turmeric, mehndi, and joyful moments with our loved ones.",
+      meals: "Evening refreshments & dinner will be served.",
+      icon: "sparkle",
     },
     {
       id: "wedding",
@@ -77,18 +91,33 @@ window.WEDDING = {
       text: "Join us as we celebrate our marriage in the warmth of Odia tradition.",
       meals: "Breakfast & lunch at Groom’s Residence. Dinner at Sunita Aangan.",
       icon: "rings",
+      program: [
+        { start: "2026-12-02T07:00:00+05:30", end: "2026-12-02T09:00:00+05:30", label: "Breakfast at Groom’s Residence (upma & dal)" },
+        { start: "2026-12-02T10:00:00+05:30", end: "2026-12-02T12:00:00+05:30", label: "Mangulti" },
+        { start: "2026-12-02T13:00:00+05:30", end: "2026-12-02T15:00:00+05:30", label: "Grand Lunch" },
+        { start: "2026-12-02T15:00:00+05:30", end: "2026-12-02T18:00:00+05:30", label: "Travel to Sunita Aangan" },
+        { start: "2026-12-02T19:00:00+05:30", end: "2026-12-02T22:00:00+05:30", label: "Procession / Baraat" },
+        { start: "2026-12-02T22:00:00+05:30", end: null, label: "Grand Dinner at Sunita Aangan" },
+      ],
     },
     {
-      id: "grand-dinner",
-      title: "Grand Dinner",
+      id: "reception",
+      title: "Reception",
       start: "2026-12-04T19:00:00+05:30",
-      end: "2026-12-05T00:00:00+05:30",
+      end: "2026-12-04T23:00:00+05:30",
       venueId: "reception",
       text: "A joyful gathering of family and friends to celebrate our new beginning.",
-      meals: "Meals for the day: breakfast, lunch & dinner.",
+      meals: "Breakfast, lunch, and the reception dinner will be served.",
       icon: "gift",
+      program: [
+        { start: "2026-12-04T07:00:00+05:30", end: "2026-12-04T09:00:00+05:30", label: "Breakfast" },
+        { start: "2026-12-04T13:00:00+05:30", end: "2026-12-04T15:00:00+05:30", label: "Lunch" },
+        { start: "2026-12-04T19:00:00+05:30", end: "2026-12-04T23:00:00+05:30", label: "Reception dinner at Crescent Convention Centre" },
+      ],
     },
   ],
+  scheduleNote:
+    "On 3 December, between the wedding and the reception, breakfast, lunch, and dinner are served at Groom’s Residence.",
   details: [
     {
       title: "Celebrate in tradition",
@@ -195,12 +224,12 @@ window.WEDDING = {
     {
       question: "Which dates should I keep free?",
       answer:
-        "The Thread Ceremony is on 1 December, the Wedding is on 2 December and continues until 5:00 AM on 3 December, and the Grand Dinner is on 4 December 2026. The full program and each venue are listed above.",
+        "The Thread Ceremony is on 1 December, followed by Haldi + Mangan that evening. The Wedding is on 2 December and continues until 5:00 AM on 3 December. 3 December is a relaxed day with meals at Groom’s Residence, and the Reception is on 4 December 2026. The full program and each venue are listed above.",
     },
     {
       question: "Where are the wedding-day meals?",
       answer:
-        "On 2 December, breakfast and lunch are at Groom’s Residence, and dinner is at Sunita Aangan, the marriage hall. Breakfast, lunch, and dinner accompany the Thread Ceremony and Grand Dinner celebrations.",
+        "On 2 December, breakfast and lunch are at Groom’s Residence, and dinner is at Sunita Aangan, the marriage hall. The Thread Ceremony includes breakfast (puri & dal) and lunch; Haldi + Mangan includes evening refreshments and dinner. On 3 December, meals are served at Groom’s Residence. The Reception on 4 December includes breakfast, lunch, and the reception dinner.",
     },
     {
       question: "How do I find the venues?",

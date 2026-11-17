@@ -46,7 +46,7 @@ test("invitation loads local assets without script or HTTP errors", async ({
   await expect(page.locator(".mantra-reading")).toHaveText(
     "Om Gan Ganapathaye Namah",
   );
-  await expect(page.locator(".event-card")).toHaveCount(3);
+  await expect(page.locator(".event-card")).toHaveCount(4);
   await expect(page.locator(".gallery-item")).toHaveCount(3);
   await expect(page.locator("#days")).toHaveText(/^\d+$/);
   for (const image of await page.locator("main img").all()) {
@@ -250,15 +250,15 @@ test("calendar download contains the venue and correct UTC event time", async ({
   expect(content).toContain("DTSTART:20261202T123000Z");
   expect(content).toContain("DTEND:20261202T233000Z");
   expect(content).toContain("SUMMARY:Aditya & Priti — Wedding");
-  expect(content).toContain("LOCATION:Sunita Aangan\\, Jagatpur");
+  expect(content).toContain("LOCATION:Sunita Aangan\\, Near Jagatpur Police Station");
   expect(content).toContain("END:VCALENDAR\r\n");
-  expect(content.match(/BEGIN:VEVENT/g)).toHaveLength(3);
-  expect(content).toContain("DTSTART:20261201T003000Z");
+  expect(content.match(/BEGIN:VEVENT/g)).toHaveLength(4);
+  expect(content).toContain("DTSTART:20261201T033000Z");
   expect(content).toContain("DTSTART:20261204T133000Z");
   const dinner = content
     .split("BEGIN:VEVENT")
-    .find((event) => event.includes("Grand Dinner"));
-  expect(dinner).toContain("DTEND:20261204T183000Z");
+    .find((event) => event.includes("Reception"));
+  expect(dinner).toContain("DTEND:20261204T173000Z");
 });
 
 test("calendar choices open Google and Outlook drafts and download an Apple event", async ({
@@ -276,7 +276,7 @@ test("calendar choices open Google and Outlook drafts and download an Apple even
   await trigger.click();
   const dialog = page.locator("#calendar-dialog");
   await expect(dialog).toBeVisible();
-  await expect(dialog.locator(".calendar-event")).toHaveCount(3);
+  await expect(dialog.locator(".calendar-event")).toHaveCount(4);
   await expect(dialog.locator(".calendar-close")).toBeFocused();
   const wedding = dialog.locator('[data-calendar-event="wedding"]');
   const google = new URL(
@@ -316,29 +316,29 @@ test("calendar choices open Google and Outlook drafts and download an Apple even
       .getAttribute("href"),
   );
   expect(threadGoogle.searchParams.get("dates")).toBe(
-    "20261201T003000Z/20261201T113000Z",
+    "20261201T033000Z/20261201T113000Z",
   );
   const dinnerGoogle = new URL(
     await dialog
-      .locator('[data-calendar-event="grand-dinner"] [data-provider="google"]')
+      .locator('[data-calendar-event="reception"] [data-provider="google"]')
       .getAttribute("href"),
   );
   expect(dinnerGoogle.searchParams.get("dates")).toBe(
-    "20261204T133000Z/20261204T183000Z",
+    "20261204T133000Z/20261204T173000Z",
   );
   expect(dinnerGoogle.searchParams.get("details")).not.toContain(
     "End time to be confirmed",
   );
   const dinnerOutlook = new URL(
     await dialog
-      .locator('[data-calendar-event="grand-dinner"] [data-provider="outlook"]')
+      .locator('[data-calendar-event="reception"] [data-provider="outlook"]')
       .getAttribute("href"),
   );
   expect(dinnerOutlook.searchParams.get("startdt")).toBe(
     "2026-12-04T13:30:00.000Z",
   );
   expect(dinnerOutlook.searchParams.get("enddt")).toBe(
-    "2026-12-04T18:30:00.000Z",
+    "2026-12-04T17:30:00.000Z",
   );
   const downloadPromise = page.waitForEvent("download");
   await wedding.locator(".calendar-apple").click();
@@ -419,7 +419,7 @@ test("Download Invitation opens the PDF in a new tab from both links", async ({
   }
 });
 
-test("family details, three venues, and the revised Grand Dinner are visible", async ({
+test("family details, three venues, and the revised Reception are visible", async ({
   page,
 }) => {
   await page.goto("/");
@@ -436,8 +436,8 @@ test("family details, three venues, and the revised Grand Dinner are visible", a
     "D/o Mrs Kalpana & Mr Harishchandra Mohapatra",
   );
   await expect(
-    page.locator('[data-event="grand-dinner"] .event-time'),
-  ).toHaveText("07:00 PM – midnight");
+    page.locator('[data-event="reception"] .event-time'),
+  ).toHaveText("07:00 PM – 11:00 PM");
   await expect(page.locator('[data-event="wedding"] .event-time')).toHaveText(
     "06:00 PM – 05:00 AM next morning",
   );
@@ -445,7 +445,7 @@ test("family details, three venues, and the revised Grand Dinner are visible", a
     "2 December 2026",
   );
   await expect(
-    page.locator('[data-event="grand-dinner"] .event-date'),
+    page.locator('[data-event="reception"] .event-date'),
   ).toHaveText("4 December 2026");
   const locations = [
     ["Groom’s Residence", "https://maps.app.goo.gl/yYMJiG3vR6FQppgM9"],
@@ -943,8 +943,8 @@ test("Odia switch preserves entries, translates new RSVP feedback, and remembers
     "୦୬:୦୦ ଅପରାହ୍ନ – ପରଦିନ ୦୫:୦୦ ପୂର୍ବାହ୍ନ",
   );
   await expect(
-    page.locator('[data-event="grand-dinner"] .event-time'),
-  ).toHaveText("୦୭:୦୦ ଅପରାହ୍ନ – ମଧ୍ୟରାତ୍ରି");
+    page.locator('[data-event="reception"] .event-time'),
+  ).toHaveText("୦୭:୦୦ ଅପରାହ୍ନ – ୧୧:୦୦ ଅପରାହ୍ନ");
   await expect(page.locator("#guest-name")).toHaveValue("Taylor Guest");
   await expect(page.locator("#guest-message")).toHaveValue(
     "My original message — ଶୁଭେଚ୍ଛା",
